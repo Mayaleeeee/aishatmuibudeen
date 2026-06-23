@@ -93,6 +93,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Aishat Muibudeen (Maya) — Product Designer & Open Source Lead" },
+      { name: "description", content: "Homepage Delight enhances a website's homepage with interactive elements and updated content sections." },
+      { property: "og:description", content: "Homepage Delight enhances a website's homepage with interactive elements and updated content sections." },
+      { name: "twitter:description", content: "Homepage Delight enhances a website's homepage with interactive elements and updated content sections." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/7301f774-a153-4f89-8614-8bb9d93abc94/id-preview-a884e37c--fdaa1031-8340-43f8-bd3a-a6902a4c9456.lovable.app-1782253838828.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/7301f774-a153-4f89-8614-8bb9d93abc94/id-preview-a884e37c--fdaa1031-8340-43f8-bd3a-a6902a4c9456.lovable.app-1782253838828.png" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
