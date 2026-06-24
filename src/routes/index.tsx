@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, ArrowUpRight, Download, Layers, Users, Compass, Search, Moon, Sun } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Download, Layers, Users, Compass, Search, Moon, Sun, Quote } from "lucide-react";
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 
@@ -37,36 +37,36 @@ const services = [
 const work = [
   { tag: "Case study", title: "AsyncAPI Website Redesign",
     blurb: "Led the full redesign including design system, accessibility audit and GSoC mentorship.",
-    swatch: "var(--color-cyan)" },
+    swatch: "var(--color-cyan)",
+    feedback: { name: "Project Lead", quote: "Maya transformed how our community experiences the website." } },
   { tag: "Design system", title: "AsyncAPI Design System",
     blurb: "Built the AsyncAPI design system from scratch — colour tokens, typography, components, WCAG AAA compliant.",
-    swatch: "var(--color-yellow)" },
+    swatch: "var(--color-yellow)",
+    feedback: { name: "Maintainer", quote: "A rock-solid foundation our contributors love to build on." } },
   { tag: "UX research", title: "UX Research Project",
     blurb: "Research, synthesis and insights that shaped real product decisions.",
-    swatch: "var(--color-coral)" },
+    swatch: "var(--color-coral)",
+    feedback: { name: "Community Member", quote: "The insights reframed how we onboard new contributors." } },
 ];
 
 type Pill = {
   label: string;
   color: string;
-  top: string;
-  left: string;
   rotate: number;
 };
 
-const pills: Pill[] = [
-  { label: "Accessibility", color: "var(--color-cyan)", top: "6%", left: "4%", rotate: -8 },
-  { label: "Design Systems", color: "var(--color-yellow)", top: "2%", left: "62%", rotate: 6 },
-  { label: "Open Source", color: "var(--color-coral)", top: "22%", left: "84%", rotate: -4 },
-  { label: "Community Building", color: "var(--color-mint)", top: "44%", left: "-2%", rotate: -10 },
-  { label: "WCAG AAA", color: "var(--color-purple)", top: "78%", left: "8%", rotate: 7 },
-  { label: "Figma", color: "var(--color-pink)", top: "70%", left: "78%", rotate: -6 },
-  { label: "Framer", color: "var(--color-yellow)", top: "88%", left: "44%", rotate: 4 },
-  { label: "Mentorship", color: "var(--color-mint)", top: "16%", left: "30%", rotate: 8 },
-  { label: "UX Research", color: "var(--color-coral)", top: "92%", left: "26%", rotate: -7 },
-  { label: "Inclusive Design", color: "var(--color-purple)", top: "54%", left: "88%", rotate: 5 },
-  { label: "Governance", color: "var(--color-pink)", top: "36%", left: "70%", rotate: -3 },
-  { label: "Documentation", color: "var(--color-cyan)", top: "82%", left: "62%", rotate: 9 },
+const leftPills: Pill[] = [
+  { label: "Accessibility", color: "var(--color-cyan)", rotate: -6 },
+  { label: "Design Systems", color: "var(--color-yellow)", rotate: 4 },
+  { label: "UX Research", color: "var(--color-coral)", rotate: -3 },
+  { label: "WCAG AAA", color: "var(--color-purple)", rotate: 5 },
+];
+
+const rightPills: Pill[] = [
+  { label: "Open Source", color: "var(--color-mint)", rotate: 5 },
+  { label: "Community Building", color: "var(--color-pink)", rotate: -4 },
+  { label: "Figma", color: "var(--color-yellow)", rotate: 6 },
+  { label: "Inclusive Design", color: "var(--color-purple)", rotate: -5 },
 ];
 
 function Index() {
@@ -126,16 +126,16 @@ function Nav() {
 function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-border pt-24">
-      {/* draggable pills layer */}
-      <div className="pointer-events-none absolute inset-0 z-10">
-        <div className="relative mx-auto h-full w-full max-w-7xl">
-          {pills.map((p) => (
-            <FloatingPill key={p.label} pill={p} />
-          ))}
-        </div>
-      </div>
-
-      <div className="relative mx-auto max-w-4xl px-6 pb-28 pt-16 text-center md:pt-24">
+      <div className="relative mx-auto max-w-7xl px-6 pb-28 pt-16 md:pt-24">
+        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[1fr_minmax(0,auto)_1fr]">
+          <div className="hidden flex-col gap-5 lg:flex" aria-hidden="false">
+            {leftPills.map((p, i) => (
+              <div key={p.label} className="flex" style={{ paddingLeft: `${i * 14}px` }}>
+                <FloatingPill pill={p} delay={i * 0.4} />
+              </div>
+            ))}
+          </div>
+          <div className="mx-auto max-w-3xl text-center">
         <p className="mb-8 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-muted-foreground">
           <span className="size-1.5 rounded-full bg-primary" aria-hidden />
           Aishat Muibudeen (Maya) — Product Designer &amp; Open Source Community Lead, Nigeria
@@ -162,12 +162,27 @@ function Hero() {
             <Download className="size-4" aria-hidden /> Download CV
           </a>
         </div>
+          </div>
+          <div className="hidden flex-col items-end gap-5 lg:flex">
+            {rightPills.map((p, i) => (
+              <div key={p.label} className="flex" style={{ paddingRight: `${i * 14}px` }}>
+                <FloatingPill pill={p} delay={i * 0.5 + 0.2} />
+              </div>
+            ))}
+          </div>
+        </div>
+        {/* Mobile pills */}
+        <div className="mt-12 flex flex-wrap justify-center gap-3 lg:hidden">
+          {[...leftPills, ...rightPills].map((p, i) => (
+            <FloatingPill key={p.label} pill={p} delay={i * 0.2} />
+          ))}
+        </div>
       </div>
     </section>
   );
 }
 
-function FloatingPill({ pill }: { pill: Pill }) {
+function FloatingPill({ pill, delay = 0 }: { pill: Pill; delay?: number }) {
   return (
     <motion.button
       type="button"
@@ -175,13 +190,13 @@ function FloatingPill({ pill }: { pill: Pill }) {
       dragSnapToOrigin
       dragElastic={0.6}
       dragTransition={{ bounceStiffness: 220, bounceDamping: 14 }}
+      animate={{ y: [0, -6, 0, 4, 0], rotate: [pill.rotate, pill.rotate + 1.5, pill.rotate] }}
+      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay }}
       whileHover={{ rotate: [pill.rotate, pill.rotate + 6, pill.rotate - 6, pill.rotate], transition: { duration: 0.5 } }}
       whileTap={{ scale: 1.08 }}
       initial={{ rotate: pill.rotate }}
-      className="pointer-events-auto absolute cursor-grab select-none rounded-full border-2 border-foreground px-4 py-2 text-sm font-semibold text-foreground shadow-[3px_3px_0_0_var(--color-foreground)] active:cursor-grabbing"
+      className="cursor-grab select-none rounded-full border-2 border-foreground px-4 py-2 text-sm font-semibold text-foreground shadow-[3px_3px_0_0_var(--color-foreground)] active:cursor-grabbing"
       style={{
-        top: pill.top,
-        left: pill.left,
         background: pill.color,
         touchAction: "none",
       }}
@@ -257,6 +272,12 @@ function Work() {
                 className="relative flex aspect-[4/3] items-end p-6"
                 style={{ background: w.swatch }}
               >
+                <div
+                  aria-hidden
+                  className="absolute inset-4 rounded-2xl border-2 border-dashed border-foreground/30 bg-background/30 flex items-center justify-center text-xs font-medium text-foreground/60"
+                >
+                  Image placeholder
+                </div>
                 <span className="rounded-full bg-background px-3 py-1 text-xs font-semibold text-foreground">
                   {w.tag}
                 </span>
@@ -268,6 +289,16 @@ function Work() {
               <div className="flex flex-1 flex-col gap-3 p-6">
                 <h3 className="font-display text-2xl font-bold leading-tight">{w.title}</h3>
                 <p className="text-sm leading-relaxed text-muted-foreground">{w.blurb}</p>
+                <figure className="mt-2 rounded-2xl border border-border bg-secondary/40 p-4">
+                  <Quote className="size-4 text-primary-deep" aria-hidden />
+                  <blockquote className="mt-1 text-sm italic leading-relaxed text-foreground/85">
+                    "{w.feedback.quote}"
+                  </blockquote>
+                  <figcaption className="mt-2 flex items-center gap-2 text-xs font-semibold text-muted-foreground">
+                    <span aria-hidden className="inline-block size-6 rounded-full" style={{ background: w.swatch }} />
+                    {w.feedback.name}
+                  </figcaption>
+                </figure>
                 <a
                   href="#"
                   className="mt-auto inline-flex w-fit items-center gap-1 rounded-full border-2 border-foreground bg-background px-4 py-2 text-sm font-semibold text-foreground hover:bg-secondary"
