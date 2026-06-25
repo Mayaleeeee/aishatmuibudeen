@@ -18,8 +18,9 @@ export const portfolioProjects: PortfolioProject[] = [
   {
     slug: "asyncapi-website-redesign",
     title: "AsyncAPI Website Redesign",
-    tag: "Case study",
-    blurb: "Led the full redesign including design system, accessibility audit and GSoC mentorship.",
+    tag: "Product Design · Accessibility · Design Systems",
+    blurb:
+      "Led the end-to-end redesign of the AsyncAPI website — used by thousands of developers worldwide. Ran a full UX audit, built a design system from scratch meeting WCAG 2.0 + AAA, and mentored a Google Summer of Code contributor to extend the work sitewide.",
     role: "Lead Product Designer",
     timeline: "2023 – 2024",
     tools: ["Figma", "Design Tokens", "GitHub", "WCAG AAA"],
@@ -28,31 +29,23 @@ export const portfolioProjects: PortfolioProject[] = [
   {
     slug: "asyncapi-design-system",
     title: "AsyncAPI Design System",
-    tag: "Design system",
-    blurb: "Built the AsyncAPI design system from scratch — colour tokens, typography, components, WCAG AAA compliant.",
+    tag: "Design Systems · Accessibility · Open Source",
+    blurb:
+      "Built the AsyncAPI design system from the ground up — colour tokens, typography scale, reusable components and accessibility documentation. Now adopted across AsyncAPI properties and used by contributors globally.",
     role: "Design Systems Lead",
     timeline: "2023 – Present",
     tools: ["Figma", "Tokens Studio", "Storybook"],
     color: "var(--color-yellow)",
   },
   {
-    slug: "ux-research-project",
-    title: "UX Research Project",
-    tag: "UX research",
-    blurb: "Research, synthesis and insights that shaped real product decisions for an open source community.",
+    slug: "oppia-ux-research",
+    title: "Oppia UX Research",
+    tag: "UX Research · Usability Testing · Inclusion",
+    blurb:
+      "Conducted in-depth interviews with 14 users across six zones in Nigeria and moderated usability testing with 24+ Oppia users. Delivered research reports, personas and empathy maps that shaped product decisions for a global learning platform.",
     role: "UX Researcher",
-    timeline: "2024",
-    tools: ["Dovetail", "Notion", "Figma"],
+    timeline: "2022 – 2023",
+    tools: ["Figma", "Notion", "Zoom", "Miro"],
     color: "var(--color-coral)",
-  },
-  {
-    slug: "opennest-africa-brand",
-    title: "OpenNest Africa — Brand & Web",
-    tag: "Branding",
-    blurb: "Co-founded and shaped the visual identity, brand system and website for a beginner-friendly OSS community.",
-    role: "Co-founder & Brand Designer",
-    timeline: "2024 – Present",
-    tools: ["Figma", "Illustrator", "Webflow"],
-    color: "var(--color-mint)",
   },
 ];
