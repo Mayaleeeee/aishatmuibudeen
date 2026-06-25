@@ -1,6 +1,6 @@
 import { Calendar, Linkedin } from "lucide-react";
 
-const CALENDLY_URL = "#"; // Placeholder — Maya will replace with Calendly link.
+const CALENDLY_URL = "https://calendly.com/aishatmuibudeen/60min"; // Placeholder — Maya will replace with Calendly link.
 
 /**
  * Closing CTA above the footer. Anchored as #contact so the nav
@@ -22,8 +22,8 @@ export function ContactCTA() {
           Ready when <span className="marker-warm">you are.</span>
         </h2>
         <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-foreground/85 md:text-xl">
-          I'm available for product design work — remote, hybrid or open to relocation. If you're
-          building products that need to be accessible, well-researched and genuinely useful, I'd
+          I'm available for product design work, remote, hybrid, or open to relocation. If you're
+          building products that need to be accessible, well-researched, and genuinely useful, I'd
           love to work with you.
         </p>
         <div className="mt-10 flex flex-wrap justify-center gap-3">
