@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Mail, Linkedin, Heart } from "lucide-react";
+import { AvailabilityBadge } from "@/components/status/AvailabilityBadge";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -16,35 +17,44 @@ function AboutPage() {
     <main className="mx-auto max-w-3xl px-6 py-24 pt-32">
       <Link to="/" className="text-sm text-primary-deep hover:underline">← Home</Link>
       <h1 className="mt-6 font-display text-5xl font-extrabold leading-tight md:text-6xl">
-        Have you ever felt <span className="marker-underline">excluded</span> in a space?
+        Designing for <span className="marker-underline">people</span>, systems &amp; community.
       </h1>
+
+      <div className="mt-8">
+        <AvailabilityBadge text="Open to new opportunities" />
+      </div>
 
       <div className="mt-10 space-y-6 text-lg leading-relaxed text-foreground/90">
         <p>
-          Have you ever thought, <em>This space isn't for me</em>, simply because you didn't come from the right background or didn't feel technical enough to belong?
+          I'm a <strong>Product Designer</strong> with over 5 years of experience across UX, UI, web design and UX research, focused on creating accessible, user-centred digital products that align with business goals and stakeholder needs.
         </p>
         <p>
-          That was me three years ago. I came from a background where technology felt like a distant world — a space you hear about but never think you can be part of. The idea of open source felt intimidating, and I didn't know where to begin.
+          A significant part of my work sits at the intersection of design, open source and developer communities. At <strong>AsyncAPI</strong> and <strong>OpenNest Africa</strong>, I've led design initiatives, contributed to design systems, mentored contributors, and collaborated with technical and non-technical stakeholders to improve usability, contributor experience and overall product outcomes. My work involves balancing user needs, engineering constraints and organisational goals to create scalable solutions.
         </p>
         <p>
-          But I didn't give up. With support from communities like <strong>AsyncAPI</strong> and <strong>She Code Africa</strong>, I found a way in and discovered that diverse voices, lived experiences, and creative perspectives truly matter here.
+          I'm especially interested in designing for complex systems where user needs, business priorities and technical constraints must come together — with a strong focus on accessibility, design systems and open-source collaboration.
         </p>
         <p>
-          Hello, my name is <strong>Aishat Muibudeen</strong> (you can call me Maya).
-        </p>
-        <p>
-          I volunteer as the <strong>Lead Design Maintainer</strong> and Code of Conduct team member at AsyncAPI, where I guide design decisions and visual identity across the website, brand, and conference repositories. I also help shape a safer, more welcoming contributor experience for all.
-        </p>
-        <p>
-          I'm also a co-founder of <strong>OpenNest-Africa</strong>, a global community supporting beginners in open source — from writers and designers to developers or explorers. We provide mentorship, guidance, and real support to help people get started and feel seen and celebrated as they do.
-        </p>
-        <p>
-          By sponsoring me, you're supporting my work, investing in the future of open source, and creating spaces where everyone feels like they belong.
-        </p>
-        <p>
-          You're helping me continue to build the bridges I once needed — and now create for others.
+          Outside of work, I enjoy reading, writing, watching films, travelling and spending time in nature.
         </p>
       </div>
+
+      <section className="mt-14 rounded-3xl border-2 border-foreground bg-card p-8">
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-deep">Availability</p>
+        <h2 className="mt-2 font-display text-3xl font-bold">Available for: Remote · Hybrid · Open to Relocation</h2>
+        <div className="mt-5">
+          <AvailabilityBadge text="Open to new opportunities" />
+        </div>
+      </section>
+
+      <section className="mt-8 rounded-3xl border-2 border-foreground bg-card p-8">
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-deep">Languages</p>
+        <h2 className="mt-2 font-display text-3xl font-bold">I speak &amp; work in</h2>
+        <ul className="mt-5 grid gap-3 text-base sm:grid-cols-2">
+          <li className="flex items-center gap-2"><span className="size-2 rounded-full bg-[var(--color-cyan)]" /> English — Native / Fluent</li>
+          <li className="flex items-center gap-2"><span className="size-2 rounded-full bg-[var(--color-yellow)]" /> German — B2 (Goethe-Zertifikat B2)</li>
+        </ul>
+      </section>
 
       <section className="mt-14 rounded-3xl border-2 border-foreground bg-card p-8">
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-deep">Available for hire</p>
