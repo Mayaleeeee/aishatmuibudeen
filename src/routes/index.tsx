@@ -1,7 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, ArrowUpRight, Download, Layers, Users, Compass, Search, Moon, Sun, Quote } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Calendar, Download, Layers, Users, Compass, Search, Moon, Sun, Quote, Linkedin } from "lucide-react";
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
+import { AvailabilityBadge } from "@/components/status/AvailabilityBadge";
+import { SocialIconLinks } from "@/components/social/SocialIconLinks";
+import { SupportLink } from "@/components/support/SupportLink";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -79,6 +82,7 @@ function Index() {
         <Work />
         <ContactCTA />
       </main>
+      <SupportLink />
       <Footer />
     </div>
   );
@@ -136,18 +140,18 @@ function Hero() {
             ))}
           </div>
           <div className="mx-auto max-w-3xl text-center">
-        <p className="mb-8 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-muted-foreground">
+        <p className="mb-8 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-medium tracking-wide text-muted-foreground">
           <span className="size-1.5 rounded-full bg-primary" aria-hidden />
-          Aishat Muibudeen (Maya) — Product Designer &amp; Open Source Community Lead, Nigeria
+          Aishat Muibudeen (Maya) · Product Designer &amp; Open Source Community Lead · Nigeria
         </p>
         <h1 className="font-display text-4xl font-extrabold leading-[1.02] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
           Designing humane products and communities that
           {" "}
           <span className="marker-underline">people can trust</span>.
         </h1>
-        <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-          I turn complex problems into accessible, inclusive interfaces and community experiences. I build for people — with people.
-        </p>
+        <div className="mt-8 flex justify-center">
+          <AvailabilityBadge />
+        </div>
         <div className="relative z-20 mt-10 flex flex-wrap justify-center gap-3">
           <a
             href="#work"
@@ -156,7 +160,9 @@ function Hero() {
             View my work <ArrowRight className="size-4" aria-hidden />
           </a>
           <a
-            href="#"
+            href="https://drive.google.com/file/d/1E2Pbu9_9dukzk96Z7fL357P32qSDcvRj/view?usp=drive_link"
+            target="_blank"
+            rel="noreferrer"
             className="inline-flex items-center gap-2 rounded-full border-2 border-foreground bg-background px-7 py-3.5 text-base font-semibold text-foreground transition-transform hover:-translate-y-0.5"
           >
             <Download className="size-4" aria-hidden /> Download CV
