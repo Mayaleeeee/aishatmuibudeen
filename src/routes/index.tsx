@@ -341,15 +341,26 @@ function ContactCTA() {
       />
       <div className="mx-auto max-w-4xl px-6 py-28 text-center md:py-36">
         <h2 className="font-display text-4xl font-extrabold leading-[1.05] md:text-6xl">
-          Let's build something <span className="marker-warm">meaningful</span> together.
+          Open for Work. <span className="marker-warm">Ready to Start.</span>
         </h2>
-        <div className="mt-10 flex justify-center">
-          <Link
-            to="/contact"
-            className="inline-flex items-center gap-2 rounded-full bg-foreground px-8 py-4 text-base font-semibold text-background border-2 border-foreground transition-transform hover:-translate-y-0.5"
+        <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-foreground/85 md:text-xl">
+          Looking for a Product Designer who gets things done — from research to systems to community? Let's talk.
+        </p>
+        <div className="mt-10 flex flex-wrap justify-center gap-3">
+          <a
+            href="https://www.linkedin.com/in/aishatmuibudeen/"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full bg-foreground px-7 py-3.5 text-base font-semibold text-background border-2 border-foreground transition-transform hover:-translate-y-0.5"
           >
-            Let's talk <ArrowRight className="size-5" aria-hidden />
-          </Link>
+            <Linkedin className="size-4" aria-hidden /> Connect on LinkedIn
+          </a>
+          <a
+            href="#"
+            className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-base font-semibold text-primary-foreground border-2 border-foreground transition-transform hover:-translate-y-0.5"
+          >
+            <Calendar className="size-4" aria-hidden /> Book a 20-min intro
+          </a>
         </div>
       </div>
     </section>
@@ -363,12 +374,7 @@ function Footer() {
         <p className="text-sm text-muted-foreground">
           © {new Date().getFullYear()} Aishat Muibudeen. Designed &amp; built with care in Lagos.
         </p>
-        <ul className="flex flex-wrap gap-5 text-sm font-semibold">
-          <li><a className="hover:text-primary-deep" href="#">Twitter / X</a></li>
-          <li><a className="hover:text-primary-deep" href="#">LinkedIn</a></li>
-          <li><a className="hover:text-primary-deep" href="#">GitHub</a></li>
-          <li><a className="hover:text-primary-deep" href="#">Read.cv</a></li>
-        </ul>
+        <SocialIconLinks />
       </div>
     </footer>
   );
