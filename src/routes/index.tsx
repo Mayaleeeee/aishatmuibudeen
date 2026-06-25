@@ -1,7 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, ArrowUpRight, Download, Layers, Users, Compass, Search, Moon, Sun, Quote } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Calendar, Download, Layers, Users, Compass, Search, Moon, Sun, Quote, Linkedin } from "lucide-react";
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
+import { AvailabilityBadge } from "@/components/status/AvailabilityBadge";
+import { SocialIconLinks } from "@/components/social/SocialIconLinks";
+import { SupportLink } from "@/components/support/SupportLink";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -79,6 +82,7 @@ function Index() {
         <Work />
         <ContactCTA />
       </main>
+      <SupportLink />
       <Footer />
     </div>
   );
@@ -136,18 +140,18 @@ function Hero() {
             ))}
           </div>
           <div className="mx-auto max-w-3xl text-center">
-        <p className="mb-8 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-muted-foreground">
+        <p className="mb-8 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-medium tracking-wide text-muted-foreground">
           <span className="size-1.5 rounded-full bg-primary" aria-hidden />
-          Aishat Muibudeen (Maya) — Product Designer &amp; Open Source Community Lead, Nigeria
+          Aishat Muibudeen (Maya) · Product Designer &amp; Open Source Community Lead · Nigeria
         </p>
         <h1 className="font-display text-4xl font-extrabold leading-[1.02] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
           Designing humane products and communities that
           {" "}
           <span className="marker-underline">people can trust</span>.
         </h1>
-        <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-          I turn complex problems into accessible, inclusive interfaces and community experiences. I build for people — with people.
-        </p>
+        <div className="mt-8 flex justify-center">
+          <AvailabilityBadge />
+        </div>
         <div className="relative z-20 mt-10 flex flex-wrap justify-center gap-3">
           <a
             href="#work"
@@ -156,7 +160,9 @@ function Hero() {
             View my work <ArrowRight className="size-4" aria-hidden />
           </a>
           <a
-            href="#"
+            href="https://drive.google.com/file/d/1E2Pbu9_9dukzk96Z7fL357P32qSDcvRj/view?usp=drive_link"
+            target="_blank"
+            rel="noreferrer"
             className="inline-flex items-center gap-2 rounded-full border-2 border-foreground bg-background px-7 py-3.5 text-base font-semibold text-foreground transition-transform hover:-translate-y-0.5"
           >
             <Download className="size-4" aria-hidden /> Download CV
@@ -335,15 +341,26 @@ function ContactCTA() {
       />
       <div className="mx-auto max-w-4xl px-6 py-28 text-center md:py-36">
         <h2 className="font-display text-4xl font-extrabold leading-[1.05] md:text-6xl">
-          Let's build something <span className="marker-warm">meaningful</span> together.
+          Open for Work. <span className="marker-warm">Ready to Start.</span>
         </h2>
-        <div className="mt-10 flex justify-center">
-          <Link
-            to="/contact"
-            className="inline-flex items-center gap-2 rounded-full bg-foreground px-8 py-4 text-base font-semibold text-background border-2 border-foreground transition-transform hover:-translate-y-0.5"
+        <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-foreground/85 md:text-xl">
+          Looking for a Product Designer who gets things done — from research to systems to community? Let's talk.
+        </p>
+        <div className="mt-10 flex flex-wrap justify-center gap-3">
+          <a
+            href="https://www.linkedin.com/in/aishatmuibudeen/"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full bg-foreground px-7 py-3.5 text-base font-semibold text-background border-2 border-foreground transition-transform hover:-translate-y-0.5"
           >
-            Let's talk <ArrowRight className="size-5" aria-hidden />
-          </Link>
+            <Linkedin className="size-4" aria-hidden /> Connect on LinkedIn
+          </a>
+          <a
+            href="#"
+            className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-base font-semibold text-primary-foreground border-2 border-foreground transition-transform hover:-translate-y-0.5"
+          >
+            <Calendar className="size-4" aria-hidden /> Book a 20-min intro
+          </a>
         </div>
       </div>
     </section>
@@ -357,12 +374,7 @@ function Footer() {
         <p className="text-sm text-muted-foreground">
           © {new Date().getFullYear()} Aishat Muibudeen. Designed &amp; built with care in Lagos.
         </p>
-        <ul className="flex flex-wrap gap-5 text-sm font-semibold">
-          <li><a className="hover:text-primary-deep" href="#">Twitter / X</a></li>
-          <li><a className="hover:text-primary-deep" href="#">LinkedIn</a></li>
-          <li><a className="hover:text-primary-deep" href="#">GitHub</a></li>
-          <li><a className="hover:text-primary-deep" href="#">Read.cv</a></li>
-        </ul>
+        <SocialIconLinks />
       </div>
     </footer>
   );
