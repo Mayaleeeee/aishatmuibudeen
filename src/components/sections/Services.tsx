@@ -10,7 +10,7 @@ const services = [
     icon: Compass,
     title: "Product Design",
     color: "var(--color-cyan)",
-    body: "End-to-end design across UX, UI, interaction and visual — from early research to shipped product.",
+    body: "End-to-end design across UX, UI, interaction, and visual, from early research to shipped product.",
   },
   {
     icon: Layers,
@@ -22,13 +22,13 @@ const services = [
     icon: Search,
     title: "UX Research",
     color: "var(--color-coral)",
-    body: "User interviews, usability testing and synthesis that ground every design decision in real evidence.",
+    body: "User interviews, usability testing, and synthesis that ground every design decision in real evidence.",
   },
   {
     icon: Users,
     title: "Open Source & Community",
     color: "var(--color-mint)",
-    body: "Design leadership, contributor onboarding and community infrastructure for open source ecosystems.",
+    body: "Design leadership, contributor onboarding, and community infrastructure for open source ecosystems.",
   },
 ];
 
@@ -39,7 +39,7 @@ export function Services() {
         <SectionHeader
           kicker="What I do"
           title="What I do"
-          lead="Four practices, one through-line: build for people — with people."
+          lead="Four practices, one through-line: build for people, with people."
         />
         <ul className="grid gap-6 md:grid-cols-2">
           {services.map(({ icon: Icon, title, body, color }) => (
