@@ -20,7 +20,7 @@ export const portfolioProjects: PortfolioProject[] = [
     title: "AsyncAPI Website Redesign",
     tag: "Product Design · Accessibility · Design Systems",
     blurb:
-      "Led the end-to-end redesign of the AsyncAPI website — used by thousands of developers worldwide. Ran a full UX audit, built a design system from scratch meeting WCAG 2.0 + AAA, and mentored a Google Summer of Code contributor to extend the work sitewide.",
+      "Led the end-to-end redesign of the AsyncAPI website, used by thousands of developers worldwide. Ran a full UX audit, built a design system from scratch meeting WCAG 2.0 + AAA, and mentored a Google Summer of Code contributor to extend the work sitewide.",
     role: "Lead Product Designer",
     timeline: "2023 – 2024",
     tools: ["Figma", "Design Tokens", "GitHub", "WCAG AAA"],
@@ -31,7 +31,7 @@ export const portfolioProjects: PortfolioProject[] = [
     title: "AsyncAPI Design System",
     tag: "Design Systems · Accessibility · Open Source",
     blurb:
-      "Built the AsyncAPI design system from the ground up — colour tokens, typography scale, reusable components and accessibility documentation. Now adopted across AsyncAPI properties and used by contributors globally.",
+      "Built the AsyncAPI design system from the ground up, colour tokens, typography scale, reusable components and accessibility documentation. Now adopted across AsyncAPI properties and used by contributors globally.",
     role: "Design Systems Lead",
     timeline: "2023 – Present",
     tools: ["Figma", "Tokens Studio", "Storybook"],
