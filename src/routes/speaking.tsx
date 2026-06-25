@@ -16,8 +16,8 @@ const talks = [
     event: "OpenForum Academy Symposium 2024",
     title: "Beyond the Code: How Diversity and Inclusion Shape the Future of Open Source",
     year: "2024",
-    format: "Online",
-    tags: ["Open Source", "Diversity"],
+    format: "Online · Harvard Business School collaboration",
+    tags: ["Open Source", "Diversity", "Inclusion"],
     color: "var(--color-cyan)",
   },
   {
