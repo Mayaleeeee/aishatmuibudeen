@@ -60,7 +60,7 @@ function ProjectDetailPage() {
           </h1>
           <p className="mt-5 max-w-2xl text-lg text-muted-foreground">{project.blurb}</p>
           <div className="mt-6 flex flex-wrap gap-2">
-            {tags.map((t) => (
+            {tags.map((t: string) => (
               <span
                 key={t}
                 className="rounded-full border-2 border-foreground bg-card px-3 py-1 text-xs font-semibold"
