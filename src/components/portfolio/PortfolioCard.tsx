@@ -15,15 +15,10 @@ export function PortfolioCard({ project }: { project: PortfolioProject }) {
     >
       <div
         className="relative flex aspect-[4/3] items-end p-6"
-        style={{ background: project.color }}
+        style={{ background: project.tint }}
       >
-        <div
-          aria-hidden
-          className="absolute inset-4 rounded-2xl border-2 border-dashed border-foreground/30 bg-background/30 flex items-center justify-center text-xs font-medium text-foreground/60"
-        >
-          Image placeholder
-        </div>
-        <span className="rounded-full bg-background px-3 py-1 text-xs font-semibold text-foreground">
+        <div aria-hidden className="shimmer absolute inset-4 rounded-2xl" />
+        <span className="relative z-10 rounded-full bg-background/95 px-3 py-1 text-xs font-semibold text-foreground shadow-sm">
           {project.tag}
         </span>
         <ArrowUpRight

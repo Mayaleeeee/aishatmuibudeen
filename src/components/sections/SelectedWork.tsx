@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { motion } from "motion/react";
 import { SectionHeader } from "./SectionHeader";
 import { portfolioProjects } from "@/components/portfolio/projects";
 
@@ -19,39 +20,44 @@ export function SelectedWork() {
           lead="A few projects I've led recently — happy to walk through specifics on a call."
         />
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {featured.map((project) => (
-            <Link
+          {featured.map((project, i) => (
+            <motion.div
               key={project.slug}
-              to="/portfolio/$slug"
-              params={{ slug: project.slug }}
-              className="lift-card group relative flex flex-col overflow-hidden rounded-3xl border-2 border-foreground bg-card"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" }}
             >
-              <div
-                className="relative flex aspect-[4/3] items-end p-6"
-                style={{ background: project.color }}
+              <Link
+                to="/portfolio/$slug"
+                params={{ slug: project.slug }}
+                className="lift-card group relative flex h-full flex-col overflow-hidden rounded-3xl border-2 border-foreground bg-card"
               >
                 <div
-                  aria-hidden
-                  className="absolute inset-4 rounded-2xl border-2 border-dashed border-foreground/30 bg-background/30 flex items-center justify-center text-xs font-medium text-foreground/60"
+                  className="relative flex aspect-[4/3] items-end p-6"
+                  style={{ background: project.tint }}
                 >
-                  Image placeholder
+                  <div
+                    aria-hidden
+                    className="shimmer absolute inset-4 rounded-2xl"
+                  />
+                  <span className="relative z-10 rounded-full bg-background/95 px-3 py-1 text-xs font-semibold text-foreground shadow-sm">
+                    {project.tag}
+                  </span>
+                  <ArrowUpRight
+                    className="absolute right-5 top-5 size-7 text-foreground transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"
+                    aria-hidden
+                  />
                 </div>
-                <span className="rounded-full bg-background px-3 py-1 text-xs font-semibold text-foreground">
-                  {project.tag}
-                </span>
-                <ArrowUpRight
-                  className="absolute right-5 top-5 size-7 text-foreground transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"
-                  aria-hidden
-                />
-              </div>
-              <div className="flex flex-1 flex-col gap-3 p-6">
-                <h3 className="font-display text-2xl font-bold leading-tight">{project.title}</h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">{project.blurb}</p>
-                <span className="mt-auto inline-flex w-fit items-center gap-1 rounded-full border-2 border-foreground bg-background px-4 py-2 text-sm font-semibold text-foreground">
-                  View case study <ArrowRight className="size-4" aria-hidden />
-                </span>
-              </div>
-            </Link>
+                <div className="flex flex-1 flex-col gap-3 p-6">
+                  <h3 className="font-display text-2xl font-bold leading-tight">{project.title}</h3>
+                  <p className="text-sm leading-relaxed text-muted-foreground">{project.blurb}</p>
+                  <span className="mt-auto inline-flex w-fit items-center gap-1 rounded-full border-2 border-foreground bg-background px-4 py-2 text-sm font-semibold text-foreground">
+                    View case study <ArrowRight className="size-4" aria-hidden />
+                  </span>
+                </div>
+              </Link>
+            </motion.div>
           ))}
         </div>
         <div className="mt-12 flex justify-center">
