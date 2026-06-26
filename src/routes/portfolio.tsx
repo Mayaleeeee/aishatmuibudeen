@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { motion } from "motion/react";
 import { PortfolioCard } from "@/components/portfolio/PortfolioCard";
 import { portfolioProjects } from "@/components/portfolio/projects";
 
@@ -25,10 +26,16 @@ function PortfolioPage() {
         Selected product design, design systems and open source work. Click any project to read the full case study.
       </p>
       <ul className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {portfolioProjects.map((project) => (
-          <li key={project.slug}>
+        {portfolioProjects.map((project, i) => (
+          <motion.li
+            key={project.slug}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.5, delay: i * 0.08, ease: "easeOut" }}
+          >
             <PortfolioCard project={project} />
-          </li>
+          </motion.li>
         ))}
       </ul>
     </main>

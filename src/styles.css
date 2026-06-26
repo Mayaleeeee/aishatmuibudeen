@@ -208,6 +208,37 @@
   50% { transform: translateY(-8px) rotate(var(--r, 0deg)); }
 }
 
+/* Skeleton/shimmer for thumbnail placeholders */
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    oklch(0.94 0.005 240) 0%,
+    oklch(0.97 0.004 240) 50%,
+    oklch(0.94 0.005 240) 100%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+
+/* Marquee strip — duplicates child track twice and slides -50% for seamless loop */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee 38s linear infinite;
+}
+
+.marquee-pause:hover .marquee-track {
+  animation-play-state: paused;
+}
+
 /* Soft, continuous pulse for the "available" status dot */
 @keyframes status-pulse {
   0%, 100% {

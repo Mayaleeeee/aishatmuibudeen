@@ -2,10 +2,12 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Nav } from "@/components/nav/Nav";
 import { Hero } from "@/components/hero/Hero";
 import { Services } from "@/components/sections/Services";
+import { LogosStrip } from "@/components/sections/LogosStrip";
 import { SelectedWork } from "@/components/sections/SelectedWork";
 import { ContactCTA } from "@/components/sections/ContactCTA";
 import { SupportLink } from "@/components/support/SupportLink";
 import { Footer } from "@/components/footer/Footer";
+import { CursorTrail } from "@/components/effects/CursorTrail";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -34,10 +36,12 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <div className="min-h-dvh bg-background text-foreground">
+      <CursorTrail />
       <Nav />
       <main id="main">
         <Hero />
         <Services />
+        <LogosStrip />
         <SelectedWork />
         <ContactCTA />
       </main>

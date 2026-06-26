@@ -1,10 +1,13 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { motion } from "motion/react";
+import { Nav } from "@/components/nav/Nav";
+import { Footer } from "@/components/footer/Footer";
 import { portfolioProjects } from "@/components/portfolio/projects";
 
 /**
- * Detail page for a single portfolio project. The structure is a
- * placeholder skeleton (problem, process, outcome, gallery) ready for
- * Maya to fill in real case-study content per project.
+ * Detail page for a single portfolio project. Structure follows the
+ * brief: Hero · Overview · Problem · Process · Key Decisions · Outcome ·
+ * Gallery. Sections are placeholders until Maya fills in real copy.
  */
 export const Route = createFileRoute("/portfolio/$slug")({
   loader: ({ params }) => {
@@ -31,63 +34,111 @@ export const Route = createFileRoute("/portfolio/$slug")({
   ),
 });
 
+const PLACEHOLDER = "Coming soon — full case study in progress 💜";
+
 function ProjectDetailPage() {
   const project = Route.useLoaderData();
+  const tags = project.tag.split(" · ");
 
   return (
-    <main className="mx-auto max-w-4xl px-6 py-24 pt-32">
-      <Link to="/portfolio" className="text-sm text-primary-deep hover:underline">← Back to portfolio</Link>
+    <div className="min-h-dvh bg-background text-foreground">
+      <Nav />
+      <main className="mx-auto max-w-4xl px-6 pb-24 pt-32">
+        <Link to="/portfolio" className="text-sm text-primary-deep hover:underline">
+          ← Back to portfolio
+        </Link>
 
-      <header className="mt-6">
-        <span
-          className="inline-block rounded-full border-2 border-foreground px-3 py-1 text-xs font-semibold"
-          style={{ background: project.color }}
+        {/* Hero */}
+        <motion.header
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="mt-6"
         >
-          {project.tag}
-        </span>
-        <h1 className="mt-4 font-display text-5xl font-extrabold leading-tight md:text-6xl">
-          {project.title}
-        </h1>
-        <p className="mt-4 max-w-2xl text-lg text-muted-foreground">{project.blurb}</p>
-      </header>
+          <h1 className="font-display text-5xl font-extrabold leading-[1.05] md:text-6xl">
+            {project.title}
+          </h1>
+          <p className="mt-5 max-w-2xl text-lg text-muted-foreground">{project.blurb}</p>
+          <div className="mt-6 flex flex-wrap gap-2">
+            {tags.map((t: string) => (
+              <span
+                key={t}
+                className="rounded-full border-2 border-foreground bg-card px-3 py-1 text-xs font-semibold"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
 
-      <section className="mt-10 grid gap-4 rounded-3xl border-2 border-foreground bg-card p-8 sm:grid-cols-3">
-        <ProjectMeta label="Role" value={project.role} />
-        <ProjectMeta label="Timeline" value={project.timeline} />
-        <ProjectMeta label="Tools" value={project.tools.join(", ")} />
-      </section>
+          <div className="mt-8 grid gap-4 rounded-3xl border-2 border-foreground bg-card p-8 sm:grid-cols-3">
+            <MetaPair label="Role" value={project.role} />
+            <MetaPair label="Timeline" value={project.timeline} />
+            <MetaPair label="Tools" value={project.tools.join(", ")} />
+          </div>
+        </motion.header>
 
-      <ProjectSection title="Problem">
-        Placeholder — the user need, business context and constraints we set out to address.
-      </ProjectSection>
+        <CaseSection title="Overview">{PLACEHOLDER}</CaseSection>
+        <CaseSection title="The Problem">{PLACEHOLDER}</CaseSection>
 
-      <ProjectSection title="Process">
-        Placeholder — research, discovery, ideation, prototyping and validation steps that shaped the work.
-      </ProjectSection>
+        {/* Process — numbered timeline */}
+        <section className="mt-16">
+          <h2 className="font-display text-3xl font-bold">My Process</h2>
+          <ol className="mt-6 space-y-4">
+            {[1, 2, 3, 4].map((n) => (
+              <li
+                key={n}
+                className="flex items-start gap-4 rounded-2xl border-2 border-foreground bg-card p-5"
+              >
+                <span
+                  aria-hidden
+                  className="inline-flex size-9 shrink-0 items-center justify-center rounded-full border-2 border-foreground font-display font-bold"
+                  style={{ background: project.tint }}
+                >
+                  {n}
+                </span>
+                <p className="text-base text-foreground/85">{PLACEHOLDER}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
 
-      <ProjectSection title="Outcome">
-        Placeholder — what shipped, measurable impact and what we learned.
-      </ProjectSection>
+        {/* Key Decisions */}
+        <section className="mt-16">
+          <h2 className="font-display text-3xl font-bold">Key Decisions</h2>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {["Decision one", "Decision two", "Decision three"].map((title) => (
+              <article
+                key={title}
+                className="rounded-2xl border-2 border-foreground bg-card p-5"
+              >
+                <h3 className="font-display text-lg font-bold">{title}</h3>
+                <p className="mt-2 text-sm text-foreground/80">{PLACEHOLDER}</p>
+              </article>
+            ))}
+          </div>
+        </section>
 
-      <section className="mt-12">
-        <h2 className="font-display text-2xl font-bold">Gallery</h2>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2">
-          {[0, 1, 2, 3].map((index) => (
-            <div
-              key={index}
-              className="flex aspect-[4/3] items-center justify-center rounded-2xl border-2 border-dashed border-foreground/30 bg-secondary text-sm font-medium text-foreground/60"
-            >
-              Image placeholder
-            </div>
-          ))}
-        </div>
-      </section>
-    </main>
+        <CaseSection title="Outcome">{PLACEHOLDER}</CaseSection>
+
+        {/* Gallery */}
+        <section className="mt-16">
+          <h2 className="font-display text-3xl font-bold">Image Gallery</h2>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            {[0, 1, 2, 3].map((i) => (
+              <div
+                key={i}
+                className="shimmer aspect-[4/3] rounded-2xl border-2 border-foreground"
+              />
+            ))}
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </div>
   );
 }
 
-/** Small labelled metadata cell used in the project header. */
-function ProjectMeta({ label, value }: { label: string; value: string }) {
+function MetaPair({ label, value }: { label: string; value: string }) {
   return (
     <div>
       <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-deep">{label}</p>
@@ -96,12 +147,17 @@ function ProjectMeta({ label, value }: { label: string; value: string }) {
   );
 }
 
-/** Titled prose section used for problem / process / outcome blocks. */
-function ProjectSection({ title, children }: { title: string; children: React.ReactNode }) {
+function CaseSection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section className="mt-12">
-      <h2 className="font-display text-2xl font-bold">{title}</h2>
-      <p className="mt-3 text-base leading-relaxed text-foreground/85">{children}</p>
-    </section>
+    <motion.section
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="mt-16"
+    >
+      <h2 className="font-display text-3xl font-bold">{title}</h2>
+      <p className="mt-4 text-base leading-relaxed text-foreground/85">{children}</p>
+    </motion.section>
   );
 }
