@@ -39,8 +39,8 @@ function Index() {
       <CursorTrail />
       <Nav />
       <main id="main">
-        <LogosStrip />
         <Hero />
+        <LogosStrip />
         <Services />
         <SelectedWork />
         <ContactCTA />
