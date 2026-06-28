@@ -115,7 +115,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
-  PortfolioRoute: typeof PortfolioRouteWithChildren
+  PortfolioRoute: typeof PortfolioRoute
+  PortfolioSlugRoute: typeof PortfolioSlugRoute
   SpeakingRoute: typeof SpeakingRoute
   WritingRoute: typeof WritingRoute
 }
@@ -166,10 +167,10 @@ declare module '@tanstack/react-router' {
     }
     '/portfolio/$slug': {
       id: '/portfolio/$slug'
-      path: '/$slug'
+      path: '/portfolio/$slug'
       fullPath: '/portfolio/$slug'
       preLoaderRoute: typeof PortfolioSlugRouteImport
-      parentRoute: typeof PortfolioRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -191,6 +192,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
   PortfolioRoute: PortfolioRouteWithChildren,
+  PortfolioSlugRoute: PortfolioSlugRoute
   SpeakingRoute: SpeakingRoute,
   WritingRoute: WritingRoute,
 }
