@@ -32,11 +32,11 @@ export function Hero() {
             </div>
             <p className="mb-8 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-medium tracking-wide text-muted-foreground">
               <span className="size-1.5 rounded-full bg-primary" aria-hidden />
-              Aishat Muibudeen (Maya) · Technical Product Designer · Developer Tools ·Open Source Maintainer · Nigeria
+              Aishat Muibudeen (Maya) · Technical Product Designer · Developer Tools · Open Source Maintainer · Nigeria
             </p>
             <h1 className="font-display text-4xl font-extrabold leading-[1.02] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
               I make developer tools{" "}
-              <span className="marker-underline">people can trust</span>.
+              <span className="marker-underline">make sense</span>.
             </h1>
             <div className="relative z-20 mt-10 flex flex-wrap justify-center gap-3">
               <a
