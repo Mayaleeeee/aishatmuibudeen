@@ -206,6 +206,38 @@ export const portfolioProjects: PortfolioProject[] = [
       "Speculative work, and labelled that way throughout. The value isn't a validated design — it's a demonstration of how I reason about a problem where the conventions don't exist yet. Every claim is stated as a hypothesis with a kill criterion attached, so it can be argued with rather than admired.",
     cover: "/case-studies/parallel-cover-16x9.png",
     cardCover: "/case-studies/parallel-cover-4x3.png",
+    images: [
+      {
+        src: "/case-studies/screen-1-mental-model.png",
+        caption:
+          "The model every IDE is built on, beside what actually happens. One actor moving through time is legible. Four actors overlapping in the same files is not — and no existing affordance helps you hold it.",
+        section: "problem",
+      },
+      {
+        src: "/case-studies/screen-2-canvas.png",
+        caption:
+          "The supervision canvas. Colour and position carry status before a single word is read, so you can tell who needs you without reading anything. The decision queue on the right is the primary object — not the code.",
+        section: "process",
+      },
+      {
+        src: "/case-studies/screen-4-review.png",
+        caption:
+          "Review is built on evidence you can check — tests added, types passing, patterns matched — rather than a confidence score you have to take on faith. Nothing merges until you accept it, and merges stay reversible.",
+        section: "process",
+      },
+      {
+        src: "/case-studies/screen-3-steering.png",
+        caption:
+          "Interrupting an agent re-scopes it instead of killing it. Finished work survives the pivot, so steering costs less than restarting — which is the only way people will actually intervene.",
+        section: "decisions",
+      },
+      {
+        src: "/case-studies/screen-5-conflict.png",
+        caption:
+          "Two agents, one file, both correct. The collision surfaces before it lands, with three real routes out: keep one, serialise them, or spawn an agent whose only job is to reconcile both intents. Never a silent auto-merge.",
+        section: "decisions",
+      },
+    ],
   },
   {
     slug: "asyncapi-design-system",
