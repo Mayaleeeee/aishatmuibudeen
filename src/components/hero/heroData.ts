@@ -9,15 +9,15 @@ export type FloatingTag = {
 };
 
 export const leftHeroTags: FloatingTag[] = [
-  { label: "Accessibility", color: "var(--color-cyan)", rotate: -6 },
+  { label: "Developer Experience", color: "var(--color-cyan)", rotate: -6 },
   { label: "Design Systems", color: "var(--color-yellow)", rotate: 4 },
-  { label: "UX Research", color: "var(--color-coral)", rotate: -3 },
-  { label: "WCAG AAA", color: "var(--color-purple)", rotate: 5 },
+  { label: "Interaction Design", color: "var(--color-coral)", rotate: -3 },
+  { label: "Accessibility", color: "var(--color-purple)", rotate: 5 },
 ];
 
 export const rightHeroTags: FloatingTag[] = [
-  { label: "Open Source", color: "var(--color-mint)", rotate: 5 },
-  { label: "Community Building", color: "var(--color-pink)", rotate: -4 },
-  { label: "Figma", color: "var(--color-yellow)", rotate: 6 },
-  { label: "Inclusive Design", color: "var(--color-purple)", rotate: -5 },
+  { label: "CLIs & Terminal UX", color: "var(--color-mint)", rotate: 5 },
+  { label: "Design Tokens", color: "var(--color-pink)", rotate: -4 },
+  { label: "UX Research", color: "var(--color-yellow)", rotate: 6 },
+  { label: "Open Source", color: "var(--color-purple)", rotate: -5 },
 ];
