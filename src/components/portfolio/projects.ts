@@ -1,7 +1,8 @@
 /**
  * Source of truth for portfolio project metadata. Each project links to
  * its own detail page at /portfolio/$slug. The first three entries are
- * featured on the homepage.
+ * featured on the homepage. Sections with no data are hidden on the
+ * case study page rather than shown as placeholders.
  */
 export type PortfolioProject = {
   slug: string;
@@ -19,6 +20,15 @@ export type PortfolioProject = {
   description: string;
   /** Three-up impact strip. */
   impact: { problem: string; whatIDid: string; impact: string };
+  /** Long-form case study content. Omitted sections are hidden. */
+  overview?: string;
+  problemDetail?: string;
+  process?: { label: string; body: string }[];
+  decisions?: { title: string; why: string }[];
+  metrics?: { stat: string; label: string }[];
+  outcome?: string;
+  evidenceLabel?: string;
+  evidenceUrl?: string;
 };
 
 export const portfolioProjects: PortfolioProject[] = [
@@ -43,6 +53,51 @@ export const portfolioProjects: PortfolioProject[] = [
       impact:
         "Accepted by maintainers, implemented by engineers in #1214, and the work seeded AsyncAPI's Developer Experience working group.",
     },
+    overview:
+      "The AsyncAPI CLI is how developers actually touch AsyncAPI day to day — validating documents, converting between spec versions, scaffolding new projects, generating code and models. It worked. Its output didn't. In late 2023 a maintainer opened an issue calling for better error messages and more consistent formatting, and assigned it to me as a design-led piece of work with no code required. What began as making the errors nicer turned into designing the language the whole tool speaks.",
+    problemDetail:
+      "A terminal gives a designer almost nothing to work with. No layout, no space, no colour hierarchy to lean on, no affordances. Output might be read by a person or piped straight into another program. Everything has to be carried by text and by state. The CLI's errors told people something had failed and then stopped — no cause, no next step, no route out of a bad state. Each command had drifted into its own conventions, so what you learned from one didn't transfer to the next. And genuinely useful advice was mixed into default output most people had already learned to skim past.",
+    process: [
+      {
+        label: "Learn the medium",
+        body: "Studied CLI design as its own discipline — usability heuristics applied to terminals, Laravel Prompts, Atlassian's CLI guidelines, and how to write an error someone can act on.",
+      },
+      {
+        label: "Map every state",
+        body: "Worked command by command through validate, convert, new and generate, enumerating every state each could reach — valid, invalid, with and without recommendations, missing input, version mismatch.",
+      },
+      {
+        label: "Find the pattern",
+        body: "Six states for validate alone, five for convert, more again for new and generate. The same three questions recurred in all of them, and that became the message architecture.",
+      },
+      {
+        label: "Design in the open",
+        body: "Posted weekly progress on the GitHub issue with screens attached, so maintainers could redirect me early instead of at the end. Emoji density and column alignment both came back as critique.",
+      },
+      {
+        label: "Ship guidelines, not screens",
+        body: "Delivered a specification engineers could apply to commands I had never drawn, rather than a folder of mockups. Implementation followed in a separate issue.",
+      },
+    ],
+    decisions: [
+      {
+        title: "Recommendations behind a flag, not on by default",
+        why: "Validate was surfacing advice nobody had asked for, so people learned to skim past all of it — including the errors that mattered. I proposed --show-recommendations, so default output stays scannable and advice appears when it's actually wanted. Quieting the interface was the readability fix.",
+      },
+      {
+        title: "Change the command grammar, not just the words",
+        why: "generate models and generate fromTemplate took their arguments in opposite orders. No amount of message design fixes a grammar you can't predict. I proposed reversing one so both share a single form, renaming the file argument to AsyncAPISource because it accepts a path or a URL, and making it optional. Maintainers accepted it — the interface problem lived in the API, so that's where the fix belonged.",
+      },
+    ],
+    metrics: [
+      { stat: "4", label: "command families redesigned end to end — validate, convert, new and generate" },
+      { stat: "6", label: "distinct states designed for validate alone, before counting sub-states" },
+      { stat: "4", label: "changes to the command API accepted by maintainers and shipped" },
+    ],
+    outcome:
+      "The design was accepted in January 2024 and implemented by AsyncAPI's engineering maintainers a few months later, working from the specification rather than from pixels. The maintainers then moved the next round of work under a newly formed Developer Experience working group, with follow-up tasks split directly out of my recommendations. It was a paid bounty engagement with review deadlines and public weekly reporting — the entire process, including the critique I got wrong the first time, is on the record.",
+    evidenceLabel: "Read the full process on GitHub — issue #872",
+    evidenceUrl: "https://github.com/asyncapi/cli/issues/872",
   },
   {
     slug: "parallel-agent-supervision",
@@ -65,6 +120,44 @@ export const portfolioProjects: PortfolioProject[] = [
       impact:
         "A self-directed exploration. Stated as falsifiable hypotheses with the tests that would prove them wrong, rather than as conclusions.",
     },
+    overview:
+      "A self-directed concept, not client work. Several companies are now building environments where multiple AI agents work on a codebase at the same time. Almost all of the design attention goes to the agents. Very little goes to the person supervising them. Parallel asks a narrower question: when four agents are editing one repository, what does the developer actually need to see, and when have they earned the right to be interrupted?",
+    problemDetail:
+      "Every IDE ever built assumes one person editing one file in sequence. Undo, diffs, the file tree, the cursor — all of it encodes a single actor moving through time. Run four agents and that model quietly breaks. You can't tell what's in progress versus finished, which decision is blocking the others, or whether two agents are about to collide in the same file. The bottleneck stops being compute and becomes attention: there is more happening than one person can hold in their head at once.",
+    process: [
+      {
+        label: "Frame the constraint",
+        body: "Started from a single line — the developer's attention is the scarce resource, not compute. Every decision after that had to answer to it.",
+      },
+      {
+        label: "State the assumptions",
+        body: "Wrote three hypotheses as falsifiable claims, each paired with what it would mean if I turned out to be wrong, rather than as principles to defend.",
+      },
+      {
+        label: "Design the canvas",
+        body: "Made concurrent agent state legible at a glance — colour and position carrying status before any word is read, with the queue of decisions as the primary object rather than the code.",
+      },
+      {
+        label: "Design the failure",
+        body: "Spent as much time on two agents colliding in one file as on the happy path, because that collision is the real cost of parallelism.",
+      },
+      {
+        label: "Write the tests",
+        body: "Defined three studies with developers running real agents on real repositories, each with the specific result that would change my mind.",
+      },
+    ],
+    decisions: [
+      {
+        title: "Interrupt is a scope edit, not a kill switch",
+        why: "Stopping an agent and starting over throws away finished work, which makes people reluctant to intervene at all. I designed interruption to preserve completed steps and re-plan from there, so steering costs less than restarting. If it turns out people restart anyway just to feel safe, the model is wrong and I would rebuild it.",
+      },
+      {
+        title: "Conflicts block. They never auto-merge",
+        why: "When two agents are both right about the same file, no heuristic should quietly pick a winner. The interface surfaces the collision before it lands and offers three routes — keep one, serialise them, or spawn an agent whose only job is to reconcile both intents. This does make the developer a bottleneck, which is the exact tension the product is trying to relieve. I kept that visible rather than hiding it.",
+      },
+    ],
+    outcome:
+      "Speculative work, and labelled that way throughout. The value isn't a validated design — it's a demonstration of how I reason about a problem where the conventions don't exist yet. Every claim is stated as a hypothesis with a kill criterion attached, so it can be argued with rather than admired.",
   },
   {
     slug: "asyncapi-design-system",
