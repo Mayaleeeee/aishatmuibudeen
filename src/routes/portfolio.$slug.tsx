@@ -67,7 +67,7 @@ function ProjectDetailPage() {
             {tags.map((t: string, i: number) => (
               <span
                 key={t}
-                className="rounded-full border-2 border-foreground px-3 py-1 text-xs font-semibold"
+                className="rounded-full border-2 border-on-tint px-3 py-1 text-xs font-semibold text-on-tint"
                 style={{ background: tagTint(i) }}
               >
                 {t}
@@ -326,12 +326,13 @@ function ProjectNav({ prev, next }: { prev: PortfolioProject; next: PortfolioPro
         <Link
           to="/portfolio/$slug"
           params={{ slug: prev.slug }}
-          className="group flex flex-col gap-3 rounded-3xl border-2 border-foreground bg-card p-8 transition-transform hover:-translate-y-1"
+          className="group flex flex-col gap-3 rounded-3xl border-2 border-on-tint p-8 transition-transform hover:-translate-y-1"
+          style={{ background: "var(--color-mint)" }}
         >
-          <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-primary-deep">
+          <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-on-tint/80">
             <ArrowLeft className="size-4" aria-hidden /> Previous
           </span>
-          <span className="font-display text-2xl font-extrabold text-foreground md:text-3xl">
+          <span className="font-display text-2xl font-extrabold text-on-tint md:text-3xl">
             {prev.title}
           </span>
         </Link>
@@ -339,12 +340,13 @@ function ProjectNav({ prev, next }: { prev: PortfolioProject; next: PortfolioPro
         <Link
           to="/portfolio/$slug"
           params={{ slug: next.slug }}
-          className="group flex flex-col gap-3 rounded-3xl border-2 border-foreground bg-card p-8 transition-transform hover:-translate-y-1 md:items-end"
+          className="group flex flex-col gap-3 rounded-3xl border-2 border-on-tint p-8 transition-transform hover:-translate-y-1 md:items-end"
+          style={{ background: "var(--color-cyan)" }}
         >
-          <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-primary-deep">
+          <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-on-tint/80">
             Next project <ArrowRight className="size-4" aria-hidden />
           </span>
-          <span className="font-display text-2xl font-extrabold text-foreground md:text-right md:text-3xl">
+          <span className="font-display text-2xl font-extrabold text-on-tint md:text-right md:text-3xl">
             {next.title}
           </span>
         </Link>
