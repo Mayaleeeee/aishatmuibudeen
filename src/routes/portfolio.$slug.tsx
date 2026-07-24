@@ -90,7 +90,7 @@ function ProjectDetailPage() {
           <img
             src={project.cover}
             alt={`${project.title} — case study cover`}
-            className="mt-10 w-full rounded-2xl border border-border"
+            className="mt-10 w-full rounded-2xl border-2 border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary hover:shadow-[0_18px_40px_-18px_var(--color-primary)]"
           />
         )}
 
@@ -216,12 +216,12 @@ function tagTint(i: number) {
 
 function Figure({ src, caption }: { src: string; caption: string }) {
   return (
-    <figure className="mt-10">
+    <figure className="group mt-10">
       <img
         src={src}
         alt={caption}
         loading="lazy"
-        className="w-full rounded-2xl border border-border"
+        className="w-full rounded-2xl border-2 border-border bg-card transition-all duration-300 group-hover:-translate-y-1 group-hover:border-primary group-hover:shadow-[0_18px_40px_-18px_var(--color-primary)]"
       />
       <figcaption className="mt-3 text-sm leading-relaxed text-muted-foreground">
         {caption}
