@@ -11,7 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WritingRouteImport } from './routes/writing'
 import { Route as SpeakingRouteImport } from './routes/speaking'
-import { Route as PortfolioRouteImport } from './routes/portfolio'
+import { Route as PortfolioIndexRouteImport } from './routes/portfolio.index'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
@@ -27,9 +27,9 @@ const SpeakingRoute = SpeakingRouteImport.update({
   path: '/speaking',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PortfolioRoute = PortfolioRouteImport.update({
-  id: '/portfolio',
-  path: '/portfolio',
+const PortfolioIndexRoute = PortfolioIndexRouteImport.update({
+  id: '/portfolio/',
+  path: '/portfolio/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -57,7 +57,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/portfolio': typeof PortfolioRoute
+  '/portfolio': typeof PortfolioIndexRoute
   '/speaking': typeof SpeakingRoute
   '/writing': typeof WritingRoute
   '/portfolio/$slug': typeof PortfolioSlugRoute
@@ -66,7 +66,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/portfolio': typeof PortfolioRoute
+  '/portfolio': typeof PortfolioIndexRoute
   '/speaking': typeof SpeakingRoute
   '/writing': typeof WritingRoute
   '/portfolio/$slug': typeof PortfolioSlugRoute
@@ -76,7 +76,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/portfolio': typeof PortfolioRoute
+  '/portfolio/': typeof PortfolioIndexRoute
   '/speaking': typeof SpeakingRoute
   '/writing': typeof WritingRoute
   '/portfolio/$slug': typeof PortfolioSlugRoute
@@ -105,7 +105,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
-    | '/portfolio'
+    | '/portfolio/'
     | '/speaking'
     | '/writing'
     | '/portfolio/$slug'
@@ -115,7 +115,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
-  PortfolioRoute: typeof PortfolioRoute
+  PortfolioIndexRoute: typeof PortfolioIndexRoute
   PortfolioSlugRoute: typeof PortfolioSlugRoute
   SpeakingRoute: typeof SpeakingRoute
   WritingRoute: typeof WritingRoute
@@ -137,11 +137,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SpeakingRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/portfolio': {
-      id: '/portfolio'
+    '/portfolio/': {
+      id: '/portfolio/'
       path: '/portfolio'
       fullPath: '/portfolio'
-      preLoaderRoute: typeof PortfolioRouteImport
+      preLoaderRoute: typeof PortfolioIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -179,7 +179,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
-  PortfolioRoute: PortfolioRoute,
+  PortfolioIndexRoute: PortfolioIndexRoute,
   PortfolioSlugRoute: PortfolioSlugRoute,
   SpeakingRoute: SpeakingRoute,
   WritingRoute: WritingRoute,
