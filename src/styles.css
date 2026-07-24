@@ -219,9 +219,9 @@
 .shimmer {
   background: linear-gradient(
     90deg,
-    oklch(0.94 0.005 240) 0%,
-    oklch(0.97 0.004 240) 50%,
-    oklch(0.94 0.005 240) 100%
+    color-mix(in oklch, var(--color-foreground) 8%, var(--color-background)) 0%,
+    color-mix(in oklch, var(--color-foreground) 3%, var(--color-background)) 50%,
+    color-mix(in oklch, var(--color-foreground) 8%, var(--color-background)) 100%
   );
   background-size: 800px 100%;
   animation: shimmer 1.6s linear infinite;
