@@ -14,8 +14,8 @@ export function PortfolioCard({ project }: { project: PortfolioProject }) {
       className="lift-card group flex h-full flex-col overflow-hidden rounded-3xl border-2 border-foreground bg-card"
     >
       <div
-        className="relative flex aspect-[4/3] items-end p-6"
-        style={{ background: project.tint }}
+        className="relative flex aspect-[4/3] items-end border-b-2 border-on-tint p-6"
+        style={{ background: project.cardCover ? undefined : project.tint }}
       >
         {project.cardCover ? (
           <img
@@ -23,7 +23,7 @@ export function PortfolioCard({ project }: { project: PortfolioProject }) {
             alt=""
             aria-hidden
             loading="lazy"
-            className="absolute inset-0 size-full object-cover"
+            className="absolute inset-0 size-full bg-secondary object-contain p-5"
           />
         ) : (
           <div aria-hidden className="shimmer absolute inset-4 rounded-2xl" />
@@ -38,7 +38,7 @@ export function PortfolioCard({ project }: { project: PortfolioProject }) {
       </div>
       <div className="flex flex-1 flex-col gap-3 p-6">
         <h3 className="font-display text-2xl font-bold leading-tight">{project.title}</h3>
-        <p className="text-sm leading-relaxed text-muted-foreground">{project.blurb}</p>
+        <p className="line-clamp-3 text-sm leading-relaxed text-muted-foreground">{project.blurb}</p>
         <span className="mt-auto inline-flex w-fit items-center gap-1 text-sm font-semibold text-primary-deep">
           View case study →
         </span>
