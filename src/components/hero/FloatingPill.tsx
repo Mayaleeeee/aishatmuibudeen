@@ -18,7 +18,7 @@ export function FloatingPill({ pill, delay = 0 }: { pill: FloatingTag; delay?: n
       whileHover={{ rotate: [pill.rotate, pill.rotate + 6, pill.rotate - 6, pill.rotate], transition: { duration: 0.5 } }}
       whileTap={{ scale: 1.08 }}
       initial={{ rotate: pill.rotate }}
-      className="cursor-grab select-none rounded-full border-2 border-foreground px-4 py-2 text-sm font-semibold text-foreground shadow-[3px_3px_0_0_var(--color-foreground)] active:cursor-grabbing"
+      className="cursor-grab select-none rounded-full border-2 border-on-tint px-4 py-2 text-sm font-semibold text-on-tint shadow-[3px_3px_0_0_var(--color-on-tint)] active:cursor-grabbing"
       style={{ background: pill.color, touchAction: "none" }}
       aria-label={`${pill.label} — draggable tag`}
     >
