@@ -1,34 +1,34 @@
-import { Compass, Layers, Search, Users } from "lucide-react";
+import { Terminal, Compass, Layers, Search } from "lucide-react";
 import { SectionHeader } from "./SectionHeader";
 
 /**
- * "What I do" — four practice areas Maya offers, rendered as a 2-column
- * grid of colour-coded cards.
+ * "What I do" — four practice areas, rendered as a 2-column grid of
+ * colour-coded cards.
  */
 const services = [
   {
+    icon: Terminal,
+    title: "Developer Experience",
+    color: "var(--color-cyan)",
+    body: "Designing the tools developers work inside — CLIs, documentation and the interfaces around them, where being understood matters more than being pretty.",
+  },
+  {
     icon: Compass,
     title: "Product Design",
-    color: "var(--color-cyan)",
-    body: "End-to-end design across UX, UI, interaction, and visual, from early research to shipped product.",
+    color: "var(--color-yellow)",
+    body: "End-to-end design across UX, UI and interaction, from early research through to shipped product.",
   },
   {
     icon: Layers,
     title: "Design Systems",
-    color: "var(--color-yellow)",
-    body: "Accessible, scalable component libraries and token-based systems that help teams build consistently.",
+    color: "var(--color-coral)",
+    body: "Accessible component libraries and token-based systems that let distributed teams build consistently without a review bottleneck.",
   },
   {
     icon: Search,
     title: "UX Research",
-    color: "var(--color-coral)",
-    body: "User interviews, usability testing, and synthesis that ground every design decision in real evidence.",
-  },
-  {
-    icon: Users,
-    title: "Open Source & Community",
     color: "var(--color-mint)",
-    body: "Design leadership, contributor onboarding, and community infrastructure for open source ecosystems.",
+    body: "Interviews, usability testing and synthesis that ground design decisions in evidence rather than opinion.",
   },
 ];
 
@@ -39,7 +39,7 @@ export function Services() {
         <SectionHeader
           kicker="What I do"
           title="What I do"
-          lead="Four practices, one through-line: build for people, with people."
+          lead="Four practices, one through-line: make complex technical work make sense to the people doing it."
         />
         <ul className="grid gap-6 md:grid-cols-2">
           {services.map(({ icon: Icon, title, body, color }) => (
