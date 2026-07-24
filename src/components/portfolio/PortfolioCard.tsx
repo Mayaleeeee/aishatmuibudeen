@@ -23,7 +23,7 @@ export function PortfolioCard({ project }: { project: PortfolioProject }) {
             alt=""
             aria-hidden
             loading="lazy"
-            className="absolute inset-0 size-full bg-secondary object-contain p-5"
+            className="absolute inset-0 size-full bg-background object-contain p-5"
           />
         ) : (
           <div aria-hidden className="shimmer absolute inset-4 rounded-2xl" />
