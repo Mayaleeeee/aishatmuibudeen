@@ -1,3 +1,4 @@
+import { createElement } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
@@ -82,15 +83,7 @@ function ProjectDetailPage() {
           </div>
 
           {project.evidenceUrl && (
-            
-              href={project.evidenceUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary-deep hover:underline"
-            >
-              {project.evidenceLabel ?? "View the source"}
-              <ExternalLink className="size-4" aria-hidden />
-            </a>
+            <EvidenceLink url={project.evidenceUrl} label={project.evidenceLabel} />
           )}
         </motion.header>
 
@@ -178,15 +171,7 @@ function ProjectDetailPage() {
               </p>
             )}
             {project.evidenceUrl && (
-              
-                href={project.evidenceUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary-deep hover:underline"
-              >
-                {project.evidenceLabel ?? "View the source"}
-                <ExternalLink className="size-4" aria-hidden />
-              </a>
+              <EvidenceLink url={project.evidenceUrl} label={project.evidenceLabel} />
             )}
           </motion.section>
         )}
@@ -207,6 +192,21 @@ function tagTint(i: number) {
     "oklch(0.96 0.04 300)",
   ];
   return tints[i % tints.length];
+}
+
+function EvidenceLink({ url, label }: { url: string; label?: string }) {
+  return createElement(
+    "a",
+    {
+      href: url,
+      target: "_blank",
+      rel: "noreferrer",
+      className:
+        "mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary-deep hover:underline",
+    },
+    label ?? "View the source",
+    createElement(ExternalLink, { className: "size-4", "aria-hidden": true }),
+  );
 }
 
 function MetaPill({ label, value }: { label: string; value: string }) {
