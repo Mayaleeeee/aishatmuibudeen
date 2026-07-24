@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 import { PortfolioCard } from "@/components/portfolio/PortfolioCard";
 import { portfolioProjects } from "@/components/portfolio/projects";
 
-export const Route = createFileRoute("/portfolio")({
+export const Route = createFileRoute("/portfolio/")({
   head: () => ({
     meta: [
       { title: "Portfolio — Aishat Muibudeen (Maya)" },
