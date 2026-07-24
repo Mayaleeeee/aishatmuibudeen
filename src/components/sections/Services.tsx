@@ -45,17 +45,17 @@ export function Services() {
           {services.map(({ icon: Icon, title, body, color }) => (
             <li
               key={title}
-              className="lift-card group relative flex flex-col rounded-3xl border-2 border-foreground p-8"
+              className="lift-card group relative flex flex-col rounded-3xl border-2 border-on-tint p-8"
               style={{ background: color }}
             >
               <span
-                className="mb-6 inline-flex size-12 items-center justify-center rounded-2xl border-2 border-foreground bg-background"
+                className="mb-6 inline-flex size-12 items-center justify-center rounded-2xl border-2 border-on-tint bg-white"
                 aria-hidden
               >
-                <Icon className="size-6 text-foreground" />
+                <Icon className="size-6 text-on-tint" />
               </span>
-              <h3 className="font-display text-2xl font-bold text-foreground">{title}</h3>
-              <p className="mt-3 text-base leading-relaxed text-foreground/85">{body}</p>
+              <h3 className="font-display text-2xl font-bold text-on-tint">{title}</h3>
+              <p className="mt-3 text-base leading-relaxed text-on-tint/85">{body}</p>
             </li>
           ))}
         </ul>
