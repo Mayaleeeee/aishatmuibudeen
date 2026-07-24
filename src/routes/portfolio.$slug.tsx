@@ -2,8 +2,6 @@ import { createElement } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
-import { Nav } from "@/components/nav/Nav";
-import { Footer } from "@/components/footer/Footer";
 import { portfolioProjects, type PortfolioProject } from "@/components/portfolio/projects";
 
 /**
@@ -16,8 +14,10 @@ export const Route = createFileRoute("/portfolio/$slug")({
     const idx = portfolioProjects.findIndex((p) => p.slug === params.slug);
     if (idx === -1) throw notFound();
     const project = portfolioProjects[idx];
-    const next = portfolioProjects[(idx + 1) % portfolioProjects.length];
-    return { project, next };
+    const total = portfolioProjects.length;
+    const next = portfolioProjects[(idx + 1) % total];
+    const prev = portfolioProjects[(idx - 1 + total) % total];
+    return { project, next, prev };
   },
   head: ({ loaderData }) => ({
     meta: loaderData
@@ -39,12 +39,11 @@ export const Route = createFileRoute("/portfolio/$slug")({
 });
 
 function ProjectDetailPage() {
-  const { project, next } = Route.useLoaderData();
+  const { project, next, prev } = Route.useLoaderData();
   const tags = project.tag.split(" · ");
 
   return (
-    <div className="min-h-dvh bg-background text-foreground">
-      <Nav />
+    <>
       <main className="mx-auto max-w-5xl px-6 pb-24 pt-32">
         <Link
           to="/portfolio"
@@ -96,6 +95,16 @@ function ProjectDetailPage() {
         )}
 
         <ImpactStrip project={project} />
+
+        {!project.overview && (
+          <section className="mt-16 rounded-3xl border-2 border-dashed border-border p-8 text-center">
+            <p className="font-display text-xl font-bold">Full case study coming soon</p>
+            <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
+              The summary above covers the essentials. I'm writing up the process, decisions
+              and outcome in detail — check back shortly, or ask me about it directly.
+            </p>
+          </section>
+        )}
 
         {project.overview && (
           <CaseSection title="Overview">
@@ -189,9 +198,8 @@ function ProjectDetailPage() {
         )}
       </main>
 
-      <NextProject next={next} />
-      <Footer />
-    </div>
+      <ProjectNav prev={prev} next={next} />
+    </>
   );
 }
 
@@ -311,26 +319,32 @@ function CaseSection({ title, children }: { title: string; children: React.React
   );
 }
 
-function NextProject({ next }: { next: PortfolioProject }) {
+function ProjectNav({ prev, next }: { prev: PortfolioProject; next: PortfolioProject }) {
   return (
     <section className="border-t border-border bg-background">
-      <div className="mx-auto max-w-5xl px-6 py-12">
+      <div className="mx-auto grid max-w-5xl gap-4 px-6 py-12 md:grid-cols-2">
+        <Link
+          to="/portfolio/$slug"
+          params={{ slug: prev.slug }}
+          className="group flex flex-col justify-between gap-4 rounded-3xl border-2 border-foreground bg-card p-8 transition-transform hover:-translate-y-1"
+        >
+          <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-primary-deep">
+            <ArrowLeft className="size-4" aria-hidden /> Previous
+          </p>
+          <h3 className="font-display text-2xl font-extrabold md:text-3xl">{prev.title}</h3>
+        </Link>
+
         <Link
           to="/portfolio/$slug"
           params={{ slug: next.slug }}
-          className="group flex flex-col items-start justify-between gap-6 rounded-3xl bg-foreground p-8 text-background transition-transform hover:-translate-y-1 md:flex-row md:items-center md:p-10"
+          className="group flex flex-col justify-between gap-4 rounded-3xl bg-foreground p-8 text-background transition-transform hover:-translate-y-1"
         >
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
-              Next project →
-            </p>
-            <h3 className="mt-2 font-display text-3xl font-extrabold md:text-4xl">
-              {next.title}
-            </h3>
-          </div>
-          <span className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground border-2 border-background">
-            View case study <ArrowRight className="size-4" aria-hidden />
-          </span>
+          <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-primary md:justify-end">
+            Next project <ArrowRight className="size-4" aria-hidden />
+          </p>
+          <h3 className="font-display text-2xl font-extrabold md:text-right md:text-3xl">
+            {next.title}
+          </h3>
         </Link>
       </div>
     </section>
