@@ -29,6 +29,12 @@ export type PortfolioProject = {
   outcome?: string;
   evidenceLabel?: string;
   evidenceUrl?: string;
+  /** 16:9 hero image at the top of the case study page. */
+  cover?: string;
+  /** 4:3 thumbnail for the portfolio card. */
+  cardCover?: string;
+  /** Inline images, placed after the named section. */
+  images?: { src: string; caption: string; section: "problem" | "process" | "decisions" | "outcome" }[];
 };
 
 export const portfolioProjects: PortfolioProject[] = [
@@ -98,6 +104,46 @@ export const portfolioProjects: PortfolioProject[] = [
       "The design was accepted in January 2024 and implemented by AsyncAPI's engineering maintainers a few months later, working from the specification rather than from pixels. The maintainers then moved the next round of work under a newly formed Developer Experience working group, with follow-up tasks split directly out of my recommendations. It was a paid bounty engagement with review deadlines and public weekly reporting — the entire process, including the critique I got wrong the first time, is on the record.",
     evidenceLabel: "Read the full process on GitHub — issue #872",
     evidenceUrl: "https://github.com/asyncapi/cli/issues/872",
+    cover: "/case-studies/cover-16x9-cli.png",
+    cardCover: "/case-studies/cover-4x3-cli.png",
+    images: [
+      {
+        src: "/case-studies/1-dead-end-error.png",
+        caption:
+          "The state I started from. It reports an internal JavaScript exception rather than the user's mistake, points at no field or line, leaks file paths meant for maintainers, and offers nothing to do next.",
+        section: "problem",
+      },
+      {
+        src: "/case-studies/2-state-map.png",
+        caption:
+          "Twenty-nine distinct states across four command families. This is what turned the brief from a styling job into a systems problem — validate alone has six.",
+        section: "process",
+      },
+      {
+        src: "/case-studies/3-message-architecture.png",
+        caption:
+          "The architecture every response follows: feedback, context, next action. Shown as the anatomy of one response, then holding across three unrelated commands.",
+        section: "process",
+      },
+      {
+        src: "/case-studies/4-missing-information.png",
+        caption:
+          "The third response class. A missing argument doesn't fail — it names what's absent, teaches the correct form with a real example, then prompts inline with a sensible default.",
+        section: "process",
+      },
+      {
+        src: "/case-studies/5-command-api-changes.png",
+        caption:
+          "The four changes to the command surface itself, each argued as a UX decision rather than a coat of paint.",
+        section: "decisions",
+      },
+      {
+        src: "/case-studies/6-constraints-critique.png",
+        caption:
+          "What review pushed back on, and what I changed. Emoji density hurting scannability, ragged column alignment, and colour becoming noise when output is piped or read in CI.",
+        section: "outcome",
+      },
+    ],
   },
   {
     slug: "parallel-agent-supervision",
