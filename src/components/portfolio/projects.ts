@@ -43,7 +43,7 @@ export const portfolioProjects: PortfolioProject[] = [
     title: "AsyncAPI CLI Redesign",
     tag: "Developer Experience · Interaction Design · Open Source",
     blurb:
-      "Redesigned the UX of the AsyncAPI CLI — the terminal tool developers use to validate, convert and generate from AsyncAPI documents. Mapped every state across four command families, defined the message architecture the tool now runs on, and proposed changes to the command API itself that maintainers accepted and engineers shipped.",
+      "Redesigned the UX of the AsyncAPI CLI — the terminal tool developers use to validate, convert, and generate from AsyncAPI documents. Mapped every state across four command families, defined the message architecture the tool now runs on, and proposed changes to the command API itself that maintainers accepted and engineers shipped.",
     role: "Technical Product Designer (AsyncAPI Bounty)",
     timeline: "Nov 2023 — May 2024",
     tools: ["Figma", "GitHub"],
@@ -55,7 +55,7 @@ export const portfolioProjects: PortfolioProject[] = [
       problem:
         "Errors told users something failed but never what to do next. Output was inconsistent between commands and cluttered by default, leaving people stranded in failed states.",
       whatIDid:
-        "Mapped every state across validate, convert, new and generate. Defined a message architecture — feedback, context, next action — and proposed changes to the command API itself.",
+        "Mapped every state across validate, convert, new, and generate. Defined a message architecture — feedback, context, next action — and proposed changes to the command API itself.",
       impact:
         "Accepted by maintainers, implemented by engineers in #1214, and the work seeded AsyncAPI's Developer Experience working group.",
     },
@@ -213,7 +213,7 @@ export const portfolioProjects: PortfolioProject[] = [
     tag: "Design Systems · Accessibility · Open Source",
     blurb:
       "Built the AsyncAPI design system from the ground up — colour tokens, typography scale, reusable components and accessibility documentation. Now adopted across AsyncAPI properties and used by contributors globally.",
-    role: "Lead Designer",
+    role: "Lead Technical Designer",
     timeline: "2023 — Present",
     tools: ["Figma", "GitHub"],
     color: "var(--color-yellow)",
@@ -232,7 +232,7 @@ export const portfolioProjects: PortfolioProject[] = [
   {
     slug: "asyncapi-website-redesign",
     title: "AsyncAPI Website Redesign",
-    tag: "Product Design · Accessibility · Design Systems · Open Source",
+    tag: "Technical Product Design · Accessibility · Design Systems · Open Source",
     blurb:
       "Led the end-to-end redesign of the AsyncAPI website, used by thousands of developers worldwide. Ran a full UX audit, built a design system from scratch meeting WCAG 2.0 + AAA, and mentored a Google Summer of Code contributor to extend the work sitewide.",
     role: "Lead Product Designer",
