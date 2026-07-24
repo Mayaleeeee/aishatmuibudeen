@@ -14,6 +14,8 @@
   --radius-4xl: calc(var(--radius) + 16px);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  /* Ink for pale tinted surfaces. Fixed in both modes: tints stay pale, so text must stay dark. */
+  --color-on-tint: oklch(0.18 0.012 250);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
@@ -225,7 +227,7 @@
   animation: shimmer 1.6s linear infinite;
 }
 
-/* Marquee strip — duplicates child track twice and slides -50% for seamless loop */
+/* Marquee strip â€” duplicates child track twice and slides -50% for seamless loop */
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
