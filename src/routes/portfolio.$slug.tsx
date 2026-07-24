@@ -326,25 +326,27 @@ function ProjectNav({ prev, next }: { prev: PortfolioProject; next: PortfolioPro
         <Link
           to="/portfolio/$slug"
           params={{ slug: prev.slug }}
-          className="group flex flex-col justify-between gap-4 rounded-3xl border-2 border-foreground bg-card p-8 transition-transform hover:-translate-y-1"
+          className="group flex flex-col gap-3 rounded-3xl border-2 border-foreground bg-card p-8 transition-transform hover:-translate-y-1"
         >
-          <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-primary-deep">
+          <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-primary-deep">
             <ArrowLeft className="size-4" aria-hidden /> Previous
-          </p>
-          <h3 className="font-display text-2xl font-extrabold md:text-3xl">{prev.title}</h3>
+          </span>
+          <span className="font-display text-2xl font-extrabold text-foreground md:text-3xl">
+            {prev.title}
+          </span>
         </Link>
 
         <Link
           to="/portfolio/$slug"
           params={{ slug: next.slug }}
-          className="group flex flex-col justify-between gap-4 rounded-3xl bg-foreground p-8 text-background transition-transform hover:-translate-y-1"
+          className="group flex flex-col gap-3 rounded-3xl border-2 border-foreground bg-card p-8 transition-transform hover:-translate-y-1 md:items-end"
         >
-          <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-primary md:justify-end">
+          <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-primary-deep">
             Next project <ArrowRight className="size-4" aria-hidden />
-          </p>
-          <h3 className="font-display text-2xl font-extrabold md:text-right md:text-3xl">
+          </span>
+          <span className="font-display text-2xl font-extrabold text-foreground md:text-right md:text-3xl">
             {next.title}
-          </h3>
+          </span>
         </Link>
       </div>
     </section>
