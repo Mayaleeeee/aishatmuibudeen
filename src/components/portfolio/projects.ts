@@ -204,6 +204,8 @@ export const portfolioProjects: PortfolioProject[] = [
     ],
     outcome:
       "Speculative work, and labelled that way throughout. The value isn't a validated design — it's a demonstration of how I reason about a problem where the conventions don't exist yet. Every claim is stated as a hypothesis with a kill criterion attached, so it can be argued with rather than admired.",
+    cover: "/case-studies/parallel-cover-16x9.png",
+    cardCover: "/case-studies/parallel-cover-4x3.png",
   },
   {
     slug: "asyncapi-design-system",
