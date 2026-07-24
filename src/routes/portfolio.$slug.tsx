@@ -1,15 +1,14 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { motion } from "motion/react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import { Nav } from "@/components/nav/Nav";
 import { Footer } from "@/components/footer/Footer";
 import { portfolioProjects, type PortfolioProject } from "@/components/portfolio/projects";
 
 /**
- * Recruiter-friendly case-study page. Order:
- * Back link · Hero · Hero image · Impact strip · Overview · Problem ·
- * Process · Key Decisions · Metrics · Gallery · Next project.
- * Body text is placeholder — Maya fills in real copy per project.
+ * Case-study page. Sections render only when the project has content for
+ * them, so projects without long-form copy show a clean short page rather
+ * than placeholders.
  */
 export const Route = createFileRoute("/portfolio/$slug")({
   loader: ({ params }) => {
@@ -38,8 +37,6 @@ export const Route = createFileRoute("/portfolio/$slug")({
   ),
 });
 
-const TEXT = "[ Text placeholder ]";
-
 function ProjectDetailPage() {
   const { project, next } = Route.useLoaderData();
   const tags = project.tag.split(" · ");
@@ -55,7 +52,6 @@ function ProjectDetailPage() {
           <ArrowLeft className="size-4" aria-hidden /> Back to Portfolio
         </Link>
 
-        {/* HERO */}
         <motion.header
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -84,65 +80,118 @@ function ProjectDetailPage() {
             <MetaPill label="Timeline" value={project.timeline} />
             <MetaPill label="Tools" value={project.tools.join(" · ")} />
           </div>
+
+          {project.evidenceUrl && (
+            
+              href={project.evidenceUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary-deep hover:underline"
+            >
+              {project.evidenceLabel ?? "View the source"}
+              <ExternalLink className="size-4" aria-hidden />
+            </a>
+          )}
         </motion.header>
 
-        {/* HERO IMAGE */}
-        <ImagePlaceholder className="mt-10 h-[450px]" />
-
-        {/* IMPACT STRIP */}
         <ImpactStrip project={project} />
 
-        {/* OVERVIEW */}
-        <CaseSection title="Overview">
-          <p className="text-base leading-relaxed text-foreground/85">{TEXT}</p>
-        </CaseSection>
-
-        {/* PROBLEM */}
-        <CaseSection title="The Problem">
-          <div className="grid gap-8 md:grid-cols-2">
-            <p className="text-base leading-relaxed text-foreground/85">
-              [ Text placeholder — 2-3 lines describing what was broken ]
+        {project.overview && (
+          <CaseSection title="Overview">
+            <p className="max-w-3xl text-base leading-relaxed text-foreground/85">
+              {project.overview}
             </p>
-            <ImagePlaceholder className="h-64" label="Before-state image placeholder" />
-          </div>
-        </CaseSection>
+          </CaseSection>
+        )}
 
-        {/* PROCESS */}
-        <ProcessTimeline />
+        {project.problemDetail && (
+          <CaseSection title="The Problem">
+            <p className="max-w-3xl text-base leading-relaxed text-foreground/85">
+              {project.problemDetail}
+            </p>
+          </CaseSection>
+        )}
 
-        {/* KEY DECISIONS */}
-        <CaseSection title="Key Decisions">
-          <div className="grid gap-6 md:grid-cols-2">
-            {[1, 2].map((n) => (
-              <article
-                key={n}
-                className="rounded-3xl border-2 border-foreground bg-card p-6"
+        {project.process && project.process.length > 0 && (
+          <CaseSection title="My Process">
+            <ol className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {project.process.map((step, i) => (
+                <li key={step.label} className="flex flex-col">
+                  <span className="inline-flex size-10 items-center justify-center rounded-full border-2 border-foreground bg-primary font-display text-sm font-bold text-primary-foreground">
+                    {i + 1}
+                  </span>
+                  <h3 className="mt-3 font-display text-lg font-bold">{step.label}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-foreground/80">{step.body}</p>
+                </li>
+              ))}
+            </ol>
+          </CaseSection>
+        )}
+
+        {project.decisions && project.decisions.length > 0 && (
+          <CaseSection title="Key Decisions">
+            <div className="grid gap-6 md:grid-cols-2">
+              {project.decisions.map((d) => (
+                <article
+                  key={d.title}
+                  className="rounded-3xl border-2 border-foreground bg-card p-6"
+                >
+                  <h3 className="font-display text-xl font-bold">{d.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-foreground/80">
+                    <span className="font-semibold text-primary-deep">Why I made this call: </span>
+                    {d.why}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </CaseSection>
+        )}
+
+        {(project.metrics?.length || project.outcome) && (
+          <motion.section
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="mt-16"
+            aria-label="Outcome"
+          >
+            <h2 className="font-display text-3xl font-bold">Outcome</h2>
+            {project.metrics && project.metrics.length > 0 && (
+              <div className="mt-6 grid gap-4 rounded-3xl bg-foreground p-6 text-background md:grid-cols-3 md:p-8">
+                {project.metrics.map((m) => (
+                  <div
+                    key={m.label}
+                    className="rounded-2xl border border-background/15 p-6 text-center"
+                  >
+                    <p className="font-display text-4xl font-extrabold text-primary md:text-5xl">
+                      {m.stat}
+                    </p>
+                    <p className="mt-3 text-sm font-medium text-background/85">{m.label}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+            {project.outcome && (
+              <p className="mt-6 max-w-3xl text-base leading-relaxed text-foreground/85">
+                {project.outcome}
+              </p>
+            )}
+            {project.evidenceUrl && (
+              
+                href={project.evidenceUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary-deep hover:underline"
               >
-                <h3 className="font-display text-xl font-bold">[ Decision title placeholder ]</h3>
-                <p className="mt-3 text-sm leading-relaxed text-foreground/80">
-                  <span className="font-semibold text-primary-deep">Why I made this call: </span>
-                  [ Reasoning placeholder ]
-                </p>
-                <ImagePlaceholder className="mt-4 h-48" />
-              </article>
-            ))}
-          </div>
-        </CaseSection>
-
-        {/* METRICS */}
-        <MetricsBlock />
-
-        {/* GALLERY */}
-        <CaseSection title="Image Gallery">
-          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <ImagePlaceholder key={i} className="aspect-[4/3]" />
-            ))}
-          </div>
-        </CaseSection>
+                {project.evidenceLabel ?? "View the source"}
+                <ExternalLink className="size-4" aria-hidden />
+              </a>
+            )}
+          </motion.section>
+        )}
       </main>
 
-      {/* NEXT PROJECT */}
       <NextProject next={next} />
       <Footer />
     </div>
@@ -167,18 +216,6 @@ function MetaPill({ label, value }: { label: string; value: string }) {
         {label}
       </span>
       <span className="ml-2 text-sm font-semibold text-foreground">{value}</span>
-    </div>
-  );
-}
-
-function ImagePlaceholder({ className = "", label = "Image placeholder" }: { className?: string; label?: string }) {
-  return (
-    <div
-      role="img"
-      aria-label={label}
-      className={`flex items-center justify-center rounded-2xl bg-secondary text-sm font-medium text-muted-foreground ${className}`}
-    >
-      [ {label} ]
     </div>
   );
 }
@@ -224,63 +261,6 @@ function CaseSection({ title, children }: { title: string; children: React.React
     >
       <h2 className="font-display text-3xl font-bold">{title}</h2>
       <div className="mt-6">{children}</div>
-    </motion.section>
-  );
-}
-
-function ProcessTimeline() {
-  const steps = ["Discovery", "Audit", "Design", "Build", "Ship"];
-  return (
-    <CaseSection title="My Process">
-      <div className="relative">
-        <div aria-hidden className="absolute left-0 right-0 top-5 hidden h-0.5 bg-foreground/15 md:block" />
-        <ol className="grid gap-6 md:grid-cols-5">
-          {steps.map((label, i) => (
-            <li key={label} className="relative flex flex-col items-center text-center">
-              <span className="relative z-10 inline-flex size-10 items-center justify-center rounded-full border-2 border-foreground bg-primary font-display text-sm font-bold text-primary-foreground">
-                {i + 1}
-              </span>
-              <h3 className="mt-3 font-display text-base font-bold">{label}</h3>
-              <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                [ Step description placeholder ]
-              </p>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </CaseSection>
-  );
-}
-
-function MetricsBlock() {
-  return (
-    <motion.section
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className="mt-16"
-      aria-label="Metrics and impact"
-    >
-      <h2 className="font-display text-3xl font-bold">Metrics &amp; Impact</h2>
-      <div className="mt-6 grid gap-4 rounded-3xl bg-foreground p-6 text-background md:grid-cols-3 md:p-8">
-        {[0, 1, 2].map((i) => (
-          <div
-            key={i}
-            className="rounded-2xl border border-background/15 p-6 text-center"
-          >
-            <p className="font-display text-4xl font-extrabold text-primary md:text-5xl">
-              [ Stat ]
-            </p>
-            <p className="mt-3 text-sm font-medium text-background/85">
-              [ Stat description placeholder ]
-            </p>
-          </div>
-        ))}
-      </div>
-      <p className="mt-6 text-base leading-relaxed text-foreground/85">
-        [ Outcome description placeholder — 2-3 lines ]
-      </p>
     </motion.section>
   );
 }
