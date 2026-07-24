@@ -17,7 +17,17 @@ export function PortfolioCard({ project }: { project: PortfolioProject }) {
         className="relative flex aspect-[4/3] items-end p-6"
         style={{ background: project.tint }}
       >
-        <div aria-hidden className="shimmer absolute inset-4 rounded-2xl" />
+        {project.cardCover ? (
+          <img
+            src={project.cardCover}
+            alt=""
+            aria-hidden
+            loading="lazy"
+            className="absolute inset-0 size-full object-cover"
+          />
+        ) : (
+          <div aria-hidden className="shimmer absolute inset-4 rounded-2xl" />
+        )}
         <span className="relative z-10 rounded-full bg-background/95 px-3 py-1 text-xs font-semibold text-foreground shadow-sm">
           {project.tag}
         </span>
