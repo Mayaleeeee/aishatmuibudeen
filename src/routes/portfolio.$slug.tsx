@@ -87,6 +87,14 @@ function ProjectDetailPage() {
           )}
         </motion.header>
 
+        {project.cover && (
+          <img
+            src={project.cover}
+            alt={`${project.title} — case study cover`}
+            className="mt-10 w-full rounded-2xl border border-border"
+          />
+        )}
+
         <ImpactStrip project={project} />
 
         {project.overview && (
@@ -102,6 +110,7 @@ function ProjectDetailPage() {
             <p className="max-w-3xl text-base leading-relaxed text-foreground/85">
               {project.problemDetail}
             </p>
+            <SectionImages project={project} section="problem" />
           </CaseSection>
         )}
 
@@ -118,6 +127,7 @@ function ProjectDetailPage() {
                 </li>
               ))}
             </ol>
+            <SectionImages project={project} section="process" />
           </CaseSection>
         )}
 
@@ -137,6 +147,7 @@ function ProjectDetailPage() {
                 </article>
               ))}
             </div>
+            <SectionImages project={project} section="decisions" />
           </CaseSection>
         )}
 
@@ -170,6 +181,7 @@ function ProjectDetailPage() {
                 {project.outcome}
               </p>
             )}
+            <SectionImages project={project} section="outcome" />
             {project.evidenceUrl && (
               <EvidenceLink url={project.evidenceUrl} label={project.evidenceLabel} />
             )}
@@ -192,6 +204,40 @@ function tagTint(i: number) {
     "oklch(0.96 0.04 300)",
   ];
   return tints[i % tints.length];
+}
+
+function Figure({ src, caption }: { src: string; caption: string }) {
+  return (
+    <figure className="mt-10">
+      <img
+        src={src}
+        alt={caption}
+        loading="lazy"
+        className="w-full rounded-2xl border border-border"
+      />
+      <figcaption className="mt-3 text-sm leading-relaxed text-muted-foreground">
+        {caption}
+      </figcaption>
+    </figure>
+  );
+}
+
+function SectionImages({
+  project,
+  section,
+}: {
+  project: PortfolioProject;
+  section: "problem" | "process" | "decisions" | "outcome";
+}) {
+  const shots = (project.images ?? []).filter((i) => i.section === section);
+  if (shots.length === 0) return null;
+  return (
+    <>
+      {shots.map((i) => (
+        <Figure key={i.src} src={i.src} caption={i.caption} />
+      ))}
+    </>
+  );
 }
 
 function EvidenceLink({ url, label }: { url: string; label?: string }) {
