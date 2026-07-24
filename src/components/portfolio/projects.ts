@@ -1,7 +1,7 @@
 /**
  * Source of truth for portfolio project metadata. Each project links to
- * its own detail page at /portfolio/$slug. Detailed case-study copy is
- * placeholder for now — Maya will fill in real content per project.
+ * its own detail page at /portfolio/$slug. The first three entries are
+ * featured on the homepage.
  */
 export type PortfolioProject = {
   slug: string;
@@ -17,31 +17,53 @@ export type PortfolioProject = {
   tint: string;
   /** One-line description shown on the case study hero. */
   description: string;
-  /** Three-up impact strip placeholders. */
+  /** Three-up impact strip. */
   impact: { problem: string; whatIDid: string; impact: string };
 };
 
 export const portfolioProjects: PortfolioProject[] = [
   {
-    slug: "asyncapi-website-redesign",
-    title: "AsyncAPI Website Redesign",
-    tag: "Product Design · Accessibility · Design Systems · Open Source",
+    slug: "asyncapi-cli-redesign",
+    title: "AsyncAPI CLI Redesign",
+    tag: "Developer Experience · Interaction Design · Open Source",
     blurb:
-      "Led the end-to-end redesign of the AsyncAPI website, used by thousands of developers worldwide. Ran a full UX audit, built a design system from scratch meeting WCAG 2.0 + AAA, and mentored a Google Summer of Code contributor to extend the work sitewide.",
-    role: "Lead Product Designer",
-    timeline: "2023 — 2025",
-    tools: ["Figma", "Framer", "GitHub"],
-    color: "var(--color-cyan)",
-    tint: "oklch(0.965 0.035 205)",
+      "Redesigned the UX of the AsyncAPI CLI — the terminal tool developers use to validate, convert and generate from AsyncAPI documents. Mapped every state across four command families, defined the message architecture the tool now runs on, and proposed changes to the command API itself that maintainers accepted and engineers shipped.",
+    role: "Product Designer (AsyncAPI Bounty)",
+    timeline: "Nov 2023 — May 2024",
+    tools: ["Figma", "GitHub"],
+    color: "var(--color-purple)",
+    tint: "oklch(0.955 0.04 300)",
     description:
-      "Leading the end-to-end redesign of a developer tool used by thousands worldwide.",
+      "Designing for a screen with no layout: text and state are the entire interface.",
     impact: {
       problem:
-        "90+ open GitHub issues. Poor navigation. No design system. Contributors struggled to find their way.",
+        "Errors told users something failed but never what to do next. Output was inconsistent between commands and cluttered by default, leaving people stranded in failed states.",
       whatIDid:
-        "Led full UX audit. Built design system from scratch. Redesigned homepage and community pages. Mentored GSoC contributor.",
+        "Mapped every state across validate, convert, new and generate. Defined a message architecture — feedback, context, next action — and proposed changes to the command API itself.",
       impact:
-        "WCAG 2.0 + AAA compliance achieved. Design system adopted sitewide. Contributor onboarding significantly improved.",
+        "Accepted by maintainers, implemented by engineers in #1214, and the work seeded AsyncAPI's Developer Experience working group.",
+    },
+  },
+  {
+    slug: "parallel-agent-supervision",
+    title: "Parallel",
+    tag: "Self-directed Concept · AI Agents · Interaction Design",
+    blurb:
+      "A concept for supervising multiple AI coding agents working at once on a single codebase. Built on one constraint: the developer's attention, not compute, is the scarce resource. Covers state legibility across concurrent agents, mid-task steering, and how agent work earns trust before it merges.",
+    role: "Self-directed concept project",
+    timeline: "2026",
+    tools: ["Figma"],
+    color: "var(--color-mint)",
+    tint: "oklch(0.96 0.04 165)",
+    description:
+      "When four agents edit one codebase, what does the developer actually need to see?",
+    impact: {
+      problem:
+        "IDEs assume one person editing one file in sequence. Run several agents and that model breaks — you can't tell what's in progress, what needs you, or what conflicts.",
+      whatIDid:
+        "Designed a supervision canvas, an interrupt model that re-scopes rather than restarts, a review surface built on verifiable evidence, and conflict handling that never auto-merges silently.",
+      impact:
+        "A self-directed exploration. Stated as falsifiable hypotheses with the tests that would prove them wrong, rather than as conclusions.",
     },
   },
   {
@@ -64,6 +86,28 @@ export const portfolioProjects: PortfolioProject[] = [
         "Built colour tokens, typography scale and reusable components from scratch. Documented everything for contributors.",
       impact:
         "Design system adopted across AsyncAPI properties. Reduced inconsistency. Now used by contributors globally.",
+    },
+  },
+  {
+    slug: "asyncapi-website-redesign",
+    title: "AsyncAPI Website Redesign",
+    tag: "Product Design · Accessibility · Design Systems · Open Source",
+    blurb:
+      "Led the end-to-end redesign of the AsyncAPI website, used by thousands of developers worldwide. Ran a full UX audit, built a design system from scratch meeting WCAG 2.0 + AAA, and mentored a Google Summer of Code contributor to extend the work sitewide.",
+    role: "Lead Product Designer",
+    timeline: "2023 — 2025",
+    tools: ["Figma", "Framer", "GitHub"],
+    color: "var(--color-cyan)",
+    tint: "oklch(0.965 0.035 205)",
+    description:
+      "Leading the end-to-end redesign of a developer tool used by thousands worldwide.",
+    impact: {
+      problem:
+        "90+ open GitHub issues. Poor navigation. No design system. Contributors struggled to find their way.",
+      whatIDid:
+        "Led full UX audit. Built design system from scratch. Redesigned homepage and community pages. Mentored GSoC contributor.",
+      impact:
+        "WCAG 2.0 + AAA compliance achieved. Design system adopted sitewide. Contributor onboarding significantly improved.",
     },
   },
   {
