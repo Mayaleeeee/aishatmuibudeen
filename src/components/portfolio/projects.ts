@@ -44,7 +44,7 @@ export const portfolioProjects: PortfolioProject[] = [
     tag: "Developer Experience · Interaction Design · Open Source",
     blurb:
       "Redesigned the UX of the AsyncAPI CLI — the terminal tool developers use to validate, convert and generate from AsyncAPI documents. Mapped every state across four command families, defined the message architecture the tool now runs on, and proposed changes to the command API itself that maintainers accepted and engineers shipped.",
-    role: "Product Designer (AsyncAPI Bounty)",
+    role: "Technical Product Designer (AsyncAPI Bounty)",
     timeline: "Nov 2023 — May 2024",
     tools: ["Figma", "GitHub"],
     color: "var(--color-purple)",
